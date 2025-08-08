@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certification Courses</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <span class="logo-text"
+              >Skill<span style="color: rgb(0, 21, 255)">Squad</span></span
+            >
+          </div>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+          <a href="../index.html" class="nav-link">Home</a>
+          <div class="nav-item dropdown">
+  <input type="checkbox" id="courses-toggle" class="dropdown-toggle" hidden>
+  <label for="courses-toggle" class="nav-link active">Courses</label>
+  <ul class="dropdown-menu">
+    <li><a href="/pages/certification-courses.html" class="dropdown-link">Certification Courses</a></li>
+    <li><a href="/pages/job-guaranteed-courses.html" class="dropdown-link">Job Guaranteed Courses</a></li>
+    <li><a href="/pages/professional-courses.html" class="dropdown-link">Professional Courses</a></li>
+    <li><a href="/pages/free-certified-courses.html" class="dropdown-link">Free Certified Courses</a></li>
+  </ul>
+</div>
+          <a href="../about.html" class="nav-link">About</a>
+          <a href="pages/placements.html" class="nav-link">Placements</a>
+          <a href="pages/contact.html" class="nav-link">Contact</a>
+          <a href="pages/apply.html" class="nav-cta">Get Started</a>
+        </div>
+
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+    <!-- Navigation end here -->
+
+    <header class="main-header">
+      <h1>Our Certification Courses</h1>
+      <p>
+        Explore our industry-recognized programs to build your skills and
+        advance your career.
+      </p>
+    </header>
+
+    <div class="course-container">
+      <!-- Filter Sidebar -->
+      <aside class="filters-sidebar">
+        <button id="mobile-filter-toggle" class="mobile-filter-toggle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon
+              points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+            ></polygon>
+          </svg>
+          <span>Filters</span>
+        </button>
+        <div class="filter-group">
+          <h3>Categories</h3>
+          <ul class="filter-options" id="category-filter">
+            <li class="active" data-category="all">All Categories</li>
+            <li data-category="cad">CAD Design & Analysis</li>
+            <li data-category="ev">Electric Vehicle Tech</li>
+            <li data-category="data">Data Analytics</li>
+            <li data-category="it">Software & IT</li>
+          </ul>
+        </div>
+        <div class="filter-group">
+          <h3>Duration</h3>
+          <ul class="filter-options" id="duration-filter">
+            <li class="active" data-duration="all">All Durations</li>
+            <li data-duration="4">4 Weeks</li>
+            <li data-duration="6">6 Weeks</li>
+            <li data-duration="8">8 Weeks</li>
+            <li data-duration="12">12 Weeks</li>
+            <li data-duration="24">24+ Weeks</li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Course Grid -->
+      <main class="course-grid-area">
+        <section class="course-grid" id="course-grid">
+          <article class="course-card" data-category="cad" data-duration="24">
+        <img src="https://thf.bing.com/th/id/OIP.nT2EEqKgXXobVDYnJVEvhQHaEK?w=277&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3" alt="Vehicle Design Course" />
+        <div class="card-content">
+            <span class="card-category cad">CAD Design & Analysis</span>
+            <h3>Vehicle Design and Analysis</h3>
+            <p>
+                An advanced program covering Solidworks, Catia, and Ansys for
+                comprehensive vehicle design.
+            </p>
+            <div class="card-meta">
+                <span>Duration: 7 Months (24+ Weeks)</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-view enquiry-btn" data-course="Vehicle Design and Analysis">Enquiry</button>
+                <a href="#" class="btn-view">Know More</a>
+            </div>
+
+            <div class="enquiry-form-container">
+                <div class="enquiry-form">
+                    <h2>Request a Callback</h2>
+                    <p class="form-note">* All fields are required</p>
+                    <form>
+                        <input type="hidden" name="course" value="Vehicle Design and Analysis">
+                        <input type="text" placeholder="Full Name *" required />
+                        <input type="tel" placeholder="Phone Number *" required />
+                        <input type="tel" placeholder="WhatsApp Number *" required />
+                        <input type="email" placeholder="Email ID *" required />
+                        <select required>
+                            <option value="" disabled selected>Preferred Language *</option>
+                            <option value="English">English</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Marathi">Marathi</option>
+                        </select>
+                        <button type="submit" class="btn-submit">Request Callback</button>
+                    </form>
+                    <ul class="form-highlights">
+                        <li>✅ Limited seats with up to 30% scholarship</li>
+                        <li>🎓 Classes by IIT Kanpur faculties</li>
+                        <li>📺 100% live sessions & 1:1 mentorship</li>
+                        <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
+
+          <article class="course-card" data-category="cad" data-duration="24">
+            <img
+              src="https://ts4.mm.bing.net/th?id=OIP.uk9ZBSAnYMln4EozYgiCqAHaD-&pid=15.1"
+              alt="Vehicle Design Course"
+            />
+            <div class="card-content">
+              <span class="card-category cad">CAD Design & Analysis</span>
+              <h3>Catia</h3>
+              <p>
+                An advanced program covering Solidworks, Catia, and Ansys for
+                comprehensive vehicle design.
+              </p>
+              <div class="card-meta">
+                <span>Duration: 7 Months (24+ Weeks)</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="data" data-duration="12">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+              alt="Data Analytics Course"
+            />
+            <div class="card-content">
+              <span class="card-category data">Data Analytics</span>
+              <h3>Certification in Data Analytics</h3>
+              <p>
+                Work on real-world projects and gain career-ready skills with
+                mentorship from industry experts[7].
+              </p>
+              <div class="card-meta">
+                <span>Duration: 12 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="ev" data-duration="24">
+            <img
+              src="https://images.unsplash.com/photo-1617886322207-6f504e7472c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+              alt="Electric Vehicle Course"
+            />
+            <div class="card-content">
+              <span class="card-category ev">Electric Vehicle Tech</span>
+              <h3>PG in Hybrid Electric Vehicle</h3>
+              <p>
+                A post-graduation program focusing on hybrid and electric
+                vehicle technology and design[4].
+              </p>
+              <div class="card-meta">
+                <span>Duration: 6 Months (24+ Weeks)</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="cad" data-duration="4">
+            <img
+              src="https://thf.bing.com/th/id/OIP.0mbnBzGwXVxW2DTQV_zRIAHaEK?w=297&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+              alt="AutoCAD Course"
+            />
+            <div class="card-content">
+              <span class="card-category cad">CAD Design & Analysis</span>
+              <h3>Advanced Automotive Design (AutoCAD)</h3>
+              <p>
+                A focused 4-week certification on advanced automotive design
+                principles using AutoCAD[15].
+              </p>
+              <div class="card-meta">
+                <span>Duration: 4 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="it" data-duration="4">
+            <img
+              src="https://thf.bing.com/th/id/OIP.XTRl4rwNqniKlEtc6swCMgHaE8?w=251&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+              alt="Python Course"
+            />
+            <div class="card-content">
+              <span class="card-category it">Software & IT</span>
+              <h3>Basics of Python</h3>
+              <p>
+                A beginner-friendly self-paced course to build a strong
+                foundation in Python programming[8].
+              </p>
+              <div class="card-meta">
+                <span>Duration: 4 Weeks (Self-Paced)</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="cad" data-duration="24">
+            <img
+              src="https://thf.bing.com/th/id/OIP.pV9u0eM5m_9iFEkuRkx0FgHaE5?w=223&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+              alt="Product Design Course"
+            />
+            <div class="card-content">
+              <span class="card-category cad">CAD Design & Analysis</span>
+              <h3>PG in Product Designing & Analysis</h3>
+              <p>
+                This program covers over 15+ skills and 10+ projects with an
+                included internship certificate[6].
+              </p>
+              <div class="card-meta">
+                <span>Duration: 10 Months (24+ Weeks)</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="it" data-duration="12">
+            <img
+              src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+              alt="MATLAB Course"
+            />
+            <div class="card-content">
+              <span class="card-category it">Software & IT</span>
+              <h3>Masterclass on MATLAB</h3>
+              <p>
+                Become an expert in MATLAB with this comprehensive masterclass,
+                from beginner to advanced topics[8].
+              </p>
+              <div class="card-meta">
+                <span>Duration: 12 Weeks (Self-Paced)</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="it" data-duration="6">
+            <img
+              src="https://thf.bing.com/th/id/OIP.AkbNGEjkC5Wj5SJfcYAu7AHaEK?w=309&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+            />
+            <div class="card-content">
+              <span class="card-category it">Software & IT</span>
+              <h3>Frontend Development</h3>
+              <p>HTML, CSS, JavaScript, React.js and modern frameworks</p>
+              <div class="card-meta">
+                <span>Duration: 6 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="it" data-duration="8">
+            <img
+              src="https://thf.bing.com/th/id/OIP.skeHbCeVnzUVINR4iXhT5QHaE_?w=271&h=183&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+              alt="Server code and terminal"
+            />
+            <div class="card-content">
+              <span class="card-category it">Software & IT</span>
+              <h3>Backend &amp; APIs</h3>
+              <p>Django, REST APIs, authentication and server management</p>
+              <div class="card-meta">
+                <span>Duration: 8 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="data" data-duration="4">
+            <img
+              src="https://thf.bing.com/th/id/OIP.narYf7i1iSH9IwJzPzaSLgHaGE?w=198&h=180&c=7&r=0&o=5&cb=thfc1&dpr=1.3&pid=1.7"
+              alt="Database schema on desktop"
+            />
+            <div class="card-content">
+              <span class="card-category data">Data Analytics</span>
+              <h3>Database Design</h3>
+              <p>SQL, NoSQL, database optimization and management</p>
+              <div class="card-meta">
+                <span>Duration: 4 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="it" data-duration="6">
+            <img
+              src="https://thf.bing.com/th/id/OIP.LuAfr7FX_bvBAKoZ-pJ0SwHaE8?w=257&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+              alt="AI neural network visualization"
+            />
+            <div class="card-content">
+              <span class="card-category it">Software & IT</span>
+              <h3>AI Integration</h3>
+              <p>Machine Learning, AI APIs, and Prompt Engineering</p>
+              <div class="card-meta">
+                <span>Duration: 6 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="it" data-duration="4">
+            <img
+              src="https://thf.bing.com/th/id/OIP.45vMRHFREfkVUNBS681VRwHaEO?w=294&h=180&c=7&r=0&o=7&cb=thfc1&dpr=1.3&pid=1.7&rm=3"
+            />
+            <div class="card-content">
+              <span class="card-category it">Software & IT</span>
+              <h3>Deployment &amp; DevOps</h3>
+              <p>Cloud deployment, CI/CD, and production best practices</p>
+              <div class="card-meta">
+                <span>Duration: 4 Weeks</span>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn-view enquiry-btn">Enquiry</a>
+                <a href="#" class="btn-view">Know More</a>
+              </div>
+
+              <div class="enquiry-form-container" id="enquiryForm">
+                <div class="enquiry-form">
+                  <h2>Request a Callback</h2>
+                  <p class="form-note">* All fields are required</p>
+                  <form>
+                    <input type="text" placeholder="Full Name *" required />
+                    <input type="tel" placeholder="Phone Number *" required />
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number *"
+                      required
+                    />
+                    <input type="email" placeholder="Email ID *" required />
+                    <select required>
+                      <option value="" disabled selected>
+                        Preferred Language *
+                      </option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Marathi">Marathi</option>
+                    </select>
+                    <button type="submit" class="btn-submit">
+                      Request Callback
+                    </button>
+                  </form>
+                  <ul class="form-highlights">
+                    <li>✅ Limited seats with up to 30% scholarship</li>
+                    <li>🎓 Classes by IIT Kanpur faculties</li>
+                    <li>📺 100% live sessions & 1:1 mentorship</li>
+                    <li>🎓 Alumni status from E&ICT, IIT Kanpur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+        <div id="no-results-message" class="no-results-message hidden">
+          <h3>No Courses Found</h3>
+          <p>Please try adjusting your filters to see more results.</p>
+        </div>
+      </main>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="logo">
+              <div class="logo-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <span class="logo-text">SkyySkill</span>
+            </div>
+            <p>
+              Empowering careers through cutting-edge technology education and
+              industry-focused training programs.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>Courses</h4>
+              <a href="pages/courses.html">View All Courses</a>
+            </div>
+
+            <div class="footer-column">
+              <h4>Company</h4>
+              <a href="pages/about.html">About Us</a>
+              <a href="pages/placements.html">Placements</a>
+              <a href="pages/contact.html">Contact</a>
+              <a href="#">Careers</a>
+            </div>
+
+            <div class="footer-column">
+              <h4>Support</h4>
+              <a href="pages/contact.html">Help Center</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Refund Policy</a>
+            </div>
+
+            <div class="footer-column">
+              <h4>Contact Info</h4>
+              <div class="contact-info">
+                <div class="contact-item">
+                  <i class="fas fa-phone"></i>
+                  <span>+91 88008893XX</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>info@skillsquad.com</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Bhubaneswar, Odisha</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 SkillSquad Academy. All rights reserved.</p>
+          <div class="footer-badges">
+            <span class="badge">🏆 Top Rated</span>
+            <span class="badge">🎓 Top Companies Certified</span>
+            <span class="badge">💼 100% Placement</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <div class="fab-main" id="fabMain">
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="fab-options" id="fabOptions">
+            <a href="tel:+918800889353" class="fab-option" data-tooltip="Call Us">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="https://wa.me/918800889353" class="fab-option" data-tooltip="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="pages/apply.html" class="fab-option" data-tooltip="Apply Now">
+                <i class="fas fa-graduation-cap"></i>
+            </a>
+            <a href="pages/contact.html" class="fab-option" data-tooltip="Contact">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
+
+    <script src="/pages/script.js"></script>
+  </body>
+</html>
