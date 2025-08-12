@@ -1362,6 +1362,13 @@ h1, h2, h3, h4, h5, h6 {
     .hero-title {
         font-size: 2rem;
     }
+    .hero-description {
+        font-size: 1rem;
+        text-align: left;
+    }
+    .stat {
+        flex: 1;
+    }
 
     .section-header h2 {
         font-size: 2rem;
@@ -1381,6 +1388,14 @@ h1, h2, h3, h4, h5, h6 {
 
     .success-metrics {
         justify-content: center;
+    }
+    .module-content {
+        grid-template-columns: 1fr;
+        padding: var(--space-lg);
+
+    }
+    .cta-content {
+        grid-template-columns: 1fr;
     }
 }
 

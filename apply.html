@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSquad Academy - Apply Now</title>
+    <meta name="description" content="Apply to SkillSquad Academy's comprehensive training and placement program. Start your journey to a successful tech career today.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/apply.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="logo-text">Skill<span style="color: rgb(0, 21, 255);">Squad</span></span>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="placements.html" class="nav-link">Placements</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="apply.html" class="nav-cta active">Get Started</a>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Apply Hero Section -->
+    <section class="apply-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="hero-badge">
+                        <span class="badge-icon">🚀</span>
+                        <span>Limited Time Offer</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        Start Your <span class="gradient-text">Tech Career</span> Journey Today
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Join our comprehensive 10-month program and get guaranteed placement support. 
+                        Transform your career with industry-leading training and mentorship.
+                    </p>
+                    
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% Live Interactive Classes</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5+ Interview Guarantee</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>20+ Real-World Projects</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-right">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <span class="offer-badge">Early Bird Discount</span>
+                            <div class="pricing">
+                                <span class="current-price">₹1,368</span>
+                                <span class="original-price">₹1,710</span>
+                            </div>
+                            <p class="savings">Save ₹342 (20% off)</p>
+                        </div>
+                        
+                        <div class="pricing-features">
+                            <div class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>10 Months Program</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>2 Years Access</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Placement Support</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Certificate</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-cta">
+                            <a href="#application-form" class="btn btn-primary btn-large">
+                                <span>Apply Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <p class="pricing-note">🔒 Secure enrollment • No hidden fees</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section id="application-form" class="application-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Application</span>
+                <h2>Complete Your <span class="gradient-text">Application</span></h2>
+                <p>Fill out the form below to start your journey with SkillSquad Academy</p>
+            </div>
+            
+            <div class="application-container">
+                <div class="form-progress">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <span>Personal Info</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <span>Education</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <span>Program Selection</span>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <span>Review & Submit</span>
+                    </div>
+                </div>
+                
+                <form class="application-form" id="applicationForm">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" data-step="1">
+                        <h3>Personal Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth *</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="address">Current Address *</label>
+                                <textarea id="address" name="address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State *</label>
+                                <input type="text" id="state" name="state" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Educational Background -->
+                    <div class="form-step" data-step="2">
+                        <h3>Educational Background</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="highestEducation">Highest Education *</label>
+                                <select id="highestEducation" name="highestEducation" required>
+                                    <option value="">Select Education Level</option>
+                                    <option value="high-school">High School</option>
+                                    <option value="diploma">Diploma</option>
+                                    <option value="bachelor">Bachelor's Degree</option>
+                                    <option value="master">Master's Degree</option>
+                                    <option value="phd">PhD</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="graduationYear">Graduation Year</label>
+                                <input type="number" id="graduationYear" name="graduationYear" min="1990" max="2030">
+                            </div>
+                            <div class="form-group">
+                                <label for="institution">Institution Name</label>
+                                <input type="text" id="institution" name="institution">
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldOfStudy">Field of Study</label>
+                                <input type="text" id="fieldOfStudy" name="fieldOfStudy">
+                            </div>
+                            <div class="form-group">
+                                <label for="cgpa">CGPA/Percentage</label>
+                                <input type="text" id="cgpa" name="cgpa" placeholder="e.g., 8.5 or 85%">
+                            </div>
+                            <div class="form-group">
+                                <label for="currentStatus">Current Status *</label>
+                                <select id="currentStatus" name="currentStatus" required>
+                                    <option value="">Select Current Status</option>
+                                    <option value="student">Currently Studying</option>
+                                    <option value="fresher">Fresher</option>
+                                    <option value="working">Working Professional</option>
+                                    <option value="unemployed">Unemployed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Program Selection -->
+                    <div class="form-step" data-step="3">
+                        <h3>Program Selection</h3>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="programInterest">Which program interests you most? *</label>
+                                <div class="program-options">
+                                    <label class="program-option">
+                                        <input type="radio" name="programInterest" value="full-stack" required>
+                                        <div class="option-content">
+                                            <i class="fas fa-laptop-code"></i>
+                                            <div>
+                                                <h4>Full Stack Development</h4>
+                                                <p>Master frontend, backend, and database technologies</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="program-option">
+                                        <input type="radio" name="programInterest" value="data-science" required>
+                                        <div class="option-content">
+                                            <i class="fas fa-chart-line"></i>
+                                            <div>
+                                                <h4>Data Science & Analytics</h4>
+                                                <p>Learn Python, ML, and data visualization</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="program-option">
+                                        <input type="radio" name="programInterest" value="ai-ml" required>
+                                        <div class="option-content">
+                                            <i class="fas fa-robot"></i>
+                                            <div>
+                                                <h4>AI & Machine Learning</h4>
+                                                <p>Deep dive into AI, ML, and prompt engineering</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="startDate">Preferred Start Date *</label>
+                                <select id="startDate" name="startDate" required>
+                                    <option value="">Select Start Date</option>
+                                    <option value="immediate">Start Immediately</option>
+                                    <option value="next-month">Next Month</option>
+                                    <option value="next-quarter">Next Quarter</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="timeCommitment">Weekly Time Commitment *</label>
+                                <select id="timeCommitment" name="timeCommitment" required>
+                                    <option value="">Select Time Commitment</option>
+                                    <option value="10-15">10-15 hours</option>
+                                    <option value="15-20">15-20 hours</option>
+                                    <option value="20-25">20-25 hours</option>
+                                    <option value="25+">25+ hours</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="motivation">Why do you want to join this program? *</label>
+                                <textarea id="motivation" name="motivation" rows="4" placeholder="Tell us about your career goals and motivation..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="priorExperience">Do you have any prior programming experience?</label>
+                                <textarea id="priorExperience" name="priorExperience" rows="3" placeholder="Describe any programming languages, projects, or experience you have..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Review & Submit -->
+                    <div class="form-step" data-step="4">
+                        <h3>Review Your Application</h3>
+                        <div class="review-summary">
+                            <div class="review-section">
+                                <h4>Personal Information</h4>
+                                <div class="review-content" id="personalReview"></div>
+                            </div>
+                            <div class="review-section">
+                                <h4>Educational Background</h4>
+                                <div class="review-content" id="educationReview"></div>
+                            </div>
+                            <div class="review-section">
+                                <h4>Program Selection</h4>
+                                <div class="review-content" id="programReview"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="termsAccepted" name="termsAccepted" required>
+                                <span>I agree to the <a href="#" target="_blank">Terms & Conditions</a> and <a href="#" target="_blank">Privacy Policy</a> *</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="marketingConsent" name="marketingConsent">
+                                <span>I would like to receive updates about new courses and opportunities</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Previous</span>
+                        </button>
+                        <button type="button" class="btn btn-primary" id="nextBtn">
+                            <span>Next</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">
+                            <span>Submit Application</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span class="logo-text">SkillSquad</span>
+                    </div>
+                    <p>Empowering careers through cutting-edge technology education and industry-focused training programs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Courses</h4>
+                        <a href="courses.html">View All Courses</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="about.html">About Us</a>
+                        <a href="placements.html">Placements</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="contact.html">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact Info</h4>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 88008893XX</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>info@skillsquad.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Bhubaneswar, Odisha</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SkillSquad Academy. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span class="badge">🏆 Top Rated</span>
+                    <span class="badge">🎓 Top Companies Certified</span>
+                    <span class="badge">💼 100% Placement</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <div class="fab-main" id="fabMain">
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="fab-options" id="fabOptions">
+            <a href="tel:+918800889353" class="fab-option" data-tooltip="Call Us">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="https://wa.me/918800889353" class="fab-option" data-tooltip="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="apply.html" class="fab-option" data-tooltip="Apply Now">
+                <i class="fas fa-graduation-cap"></i>
+            </a>
+            <a href="contact.html" class="fab-option" data-tooltip="Contact">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/apply.js"></script>
+</body>
+</html>
