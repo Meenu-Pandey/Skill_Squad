@@ -501,19 +501,19 @@ class SkillSquadApp {
         });
     }
 
-    setupServiceWorker() {
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-    }
+    // setupServiceWorker() {
+    //     if ('serviceWorker' in navigator) {
+    //         window.addEventListener('load', () => {
+    //             navigator.serviceWorker.register('/sw.js')
+    //                 .then(registration => {
+    //                     console.log('SW registered: ', registration);
+    //                 })
+    //                 .catch(registrationError => {
+    //                     console.log('SW registration failed: ', registrationError);
+    //                 });
+    //         });
+    //     }
+    // }
 
     // Analytics & Tracking
     trackEvent(eventName, properties = {}) {

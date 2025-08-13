@@ -21,7 +21,7 @@ document.querySelectorAll(".callback-form").forEach((form) => {
         );
       }
 
-      const response = await fetch("submit_callback.php", {
+      const response = await fetch("backend/submit_callback.php", {
         method: "POST",
         body: formData,
       });

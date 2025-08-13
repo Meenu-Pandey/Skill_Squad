@@ -181,71 +181,78 @@
             </form>
           </div>
           <script>
-            document
-              .getElementById("contactForm")
-              .addEventListener("submit", function (e) {
-                e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById("contactForm");
+    
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-                const form = e.target;
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalHtml = submitBtn.innerHTML;
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalHtml = submitBtn.innerHTML;
 
-                // Show loading state
-                submitBtn.disabled = true;
-                submitBtn.innerHTML =
-                  '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
 
-                // Hide previous response
-                document.getElementById("formResponse").style.display = "none";
+            // Create response div if it doesn't exist
+            let responseDiv = document.getElementById("formResponse");
+            if (!responseDiv) {
+                responseDiv = document.createElement('div');
+                responseDiv.id = 'formResponse';
+                form.parentNode.insertBefore(responseDiv, form.nextSibling);
+            }
+            responseDiv.style.display = "none";
 
-                // Send form data
-                fetch("backend/submit_contact.php", {
-                  method: "POST",
-                  body: new FormData(form),
-                })
-                  .then((response) => response.json())
-                  .then((data) => {
-                    const responseDiv = document.getElementById("formResponse");
+            // Send form data
+            fetch("backend/submit_contact.php", {
+                method: "POST",
+                body: new FormData(form),
+            })
+                .then((response) => response.json())
+                .then((data) => {
                     responseDiv.style.display = "block";
 
                     if (data.success) {
-                      responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                      form.reset();
+                        responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                        form.reset();
                     } else {
-                      let errorHtml = `<div class="alert alert-danger"><strong>${data.message}</strong>`;
-                      if (data.errors) {
-                        errorHtml += "<ul>";
-                        for (const [field, error] of Object.entries(
-                          data.errors
-                        )) {
-                          errorHtml += `<li>${error}</li>`;
-                          // Highlight problematic fields
-                          const input = form.querySelector(`[name="${field}"]`);
-                          if (input) {
-                            input.style.borderColor = "#dc3545";
-                            input.addEventListener("input", () => {
-                              input.style.borderColor = "";
-                            });
-                          }
+                        let errorHtml = `<div class="alert alert-danger"><strong>${data.message}</strong>`;
+                        if (data.errors) {
+                            errorHtml += "<ul>";
+                            for (const [field, error] of Object.entries(data.errors)) {
+                                errorHtml += `<li>${error}</li>`;
+                                // Highlight problematic fields
+                                const input = form.querySelector(`[name="${field}"]`);
+                                if (input) {
+                                    input.style.borderColor = "#dc3545";
+                                    input.addEventListener("input", () => {
+                                        input.style.borderColor = "";
+                                    });
+                                }
+                            }
+                            errorHtml += "</ul>";
                         }
-                        errorHtml += "</ul>";
-                      }
-                      errorHtml += "</div>";
-                      responseDiv.innerHTML = errorHtml;
+                        errorHtml += "</div>";
+                        responseDiv.innerHTML = errorHtml;
                     }
-                  })
-                  .catch((error) => {
-                    document.getElementById(
-                      "formResponse"
-                    ).innerHTML = `<div class="alert alert-danger">Network error. Please try again.</div>`;
+                })
+                .catch((error) => {
+                    responseDiv.style.display = "block";
+                    responseDiv.innerHTML = `<div class="alert alert-danger">Network error. Please try again.</div>`;
                     console.error("Error:", error);
-                  })
-                  .finally(() => {
+                })
+                .finally(() => {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalHtml;
-                  });
-              });
-          </script>
+                });
+        });
+    } else {
+        console.warn("Contact form not found");
+    }
+});
+</script>
         </div>
       </div>
     </section>

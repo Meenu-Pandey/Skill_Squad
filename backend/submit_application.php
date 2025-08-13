@@ -90,19 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $response['success'] = true;
             $response['message'] = 'Application submitted successfully!';
-            
-            // Send email notification (optional)
-            $to = 'admissions@yourdomain.com';
-            $subject = 'New Application Submission';
-            $message = "A new application has been submitted:\n\n";
-            $message .= "Name: {$data['first_name']} {$data['last_name']}\n";
-            $message .= "Email: {$data['email']}\n";
-            $message .= "Phone: {$data['phone']}\n";
-            $message .= "Program: {$data['program_interest']}\n\n";
-            $message .= "View application in admin panel for full details.";
-            
-            $headers = "From: noreply@yourdomain.com";
-            mail($to, $subject, $message, $headers);
         } else {
             $response['message'] = 'Error submitting application: ' . $stmt->error;
         }

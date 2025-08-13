@@ -38,18 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $response['success'] = true;
             $response['message'] = 'Your message has been sent successfully!';
-            
-            // Optional: Send email notification
-            $to = 'your@email.com'; // Change this
-            $emailSubject = "New Contact Form Submission: $subject";
-            $emailBody = "You have received a new message:\n\n".
-                        "Name: $name\n".
-                        "Email: $email\n".
-                        "Phone: ".($phone ? $phone : 'Not provided')."\n\n".
-                        "Message:\n$message";
-            
-            $headers = "From: $email\r\n";
-            mail($to, $emailSubject, $emailBody, $headers);
         } else {
             $response['message'] = 'Database error: ' . $stmt->error;
         }

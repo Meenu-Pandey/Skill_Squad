@@ -21,7 +21,7 @@ $sql = "CREATE TABLE IF NOT EXISTS course_callbacks (
     whatsapp VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
     preferred_language VARCHAR(20) NOT NULL,
-    course_name VARCHAR(100) NOT NULL,  // Added to track which course
+    course_name VARCHAR(100) NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
