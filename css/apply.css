@@ -256,8 +256,12 @@
 .progress-step.completed .step-number {
     background: #10b981;
     color: white;
+    cursor: default;
+    opacity: 0.85;
 }
-
+.progress-step.completed:hover .step-number {
+    background: #10b981;
+}
 .progress-step span {
     font-size: 0.9rem;
     color: #6b7280;
@@ -477,6 +481,19 @@
     gap: 8px;
 }
 
+.form-navigation .btn:only-child {
+    margin-left: auto;
+}
+
+.form-navigation .prev-btn {
+    margin-right: auto;
+}
+
+.form-navigation .next-btn,
+.form-navigation .submit-btn {
+    margin-left: auto;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .apply-hero .hero-content {
@@ -629,6 +646,31 @@
 .form-group.success select,
 .form-group.success textarea {
     border-color: #10b981;
+    background-color: #f0fdf4;
+}
+
+.form-group.success {
+    position: relative;
+}
+
+.form-group.success::after {
+    content: '✓';
+    position: absolute;
+    right: 12px;
+    top: 38px;
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.form-group.success.full-width::after {
+    top: 38px;
+}
+
+.form-group.success input[type="date"]::after,
+.form-group.success select::after {
+    display: none;
 }
 
 /* Smooth Transitions */

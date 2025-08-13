@@ -195,6 +195,13 @@
                                 <input type="text" id="state" name="state" required>
                             </div>
                         </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-primary next-btn" data-step="1">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Step 2: Educational Background -->
@@ -239,6 +246,17 @@
                                     <option value="unemployed">Unemployed</option>
                                 </select>
                             </div>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-btn" data-step="2" style="display: none;">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="button" class="btn btn-primary next-btn" data-step="2">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                     
@@ -314,6 +332,17 @@
                                 <textarea id="priorExperience" name="priorExperience" rows="3" placeholder="Describe any programming languages, projects, or experience you have..."></textarea>
                             </div>
                         </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-btn" data-step="3" style="display: none;">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="button" class="btn btn-primary next-btn" data-step="3">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Step 4: Review & Submit -->
@@ -347,9 +376,20 @@
                                 <span>I would like to receive updates about new courses and opportunities</span>
                             </label>
                         </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-btn" data-step="4">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+                                <span>Submit Application</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
                     </div>
                     
-                    <div class="form-navigation">
+                    <!-- <div class="form-navigation">
                         <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">
                             <i class="fas fa-arrow-left"></i>
                             <span>Previous</span>
@@ -362,7 +402,7 @@
                             <span>Submit Application</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
