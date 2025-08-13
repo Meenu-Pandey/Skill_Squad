@@ -304,7 +304,7 @@ class SkillSquadApp {
 
     // Form Handling
     setupFormHandling() {
-        const forms = document.querySelectorAll('form');
+        const forms = document.querySelectorAll('form:not(#applicationForm)');
         
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {

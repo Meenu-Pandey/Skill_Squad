@@ -195,6 +195,13 @@
                                 <input type="text" id="state" name="state" required>
                             </div>
                         </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-primary next-btn" data-step="1">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Step 2: Educational Background -->
@@ -239,6 +246,17 @@
                                     <option value="unemployed">Unemployed</option>
                                 </select>
                             </div>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-btn" data-step="2" style="display: none;">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="button" class="btn btn-primary next-btn" data-step="2">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                     
@@ -314,6 +332,17 @@
                                 <textarea id="priorExperience" name="priorExperience" rows="3" placeholder="Describe any programming languages, projects, or experience you have..."></textarea>
                             </div>
                         </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-btn" data-step="3" style="display: none;">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="button" class="btn btn-primary next-btn" data-step="3">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Step 4: Review & Submit -->
@@ -347,9 +376,20 @@
                                 <span>I would like to receive updates about new courses and opportunities</span>
                             </label>
                         </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-btn" data-step="4">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+                                <span>Submit Application</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
                     </div>
                     
-                    <div class="form-navigation">
+                    <!-- <div class="form-navigation">
                         <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">
                             <i class="fas fa-arrow-left"></i>
                             <span>Previous</span>
@@ -362,7 +402,7 @@
                             <span>Submit Application</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -377,29 +417,28 @@
                         <div class="logo-icon">
                             <i class="fas fa-code"></i>
                         </div>
-                        <span class="logo-text">SkillSquad</span>
+                        <span class="logo-text" style="color: silver;">Skill<span style="color: rgb(0, 21, 255);">Squad</span></span>
                     </div>
                     <p>Empowering careers through cutting-edge technology education and industry-focused training programs.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Courses</h4>
+                    <div class="footer-column" inline>
+                        <h4>Programs</h4>
                         <a href="courses.html">View All Courses</a>
-                    </div>
-                    
-                    <div class="footer-column">
+                        <br>
                         <h4>Company</h4>
                         <a href="about.html">About Us</a>
                         <a href="placements.html">Placements</a>
                         <a href="contact.html">Contact</a>
+                        <a href="#">Careers</a>
                     </div>
                     
                     <div class="footer-column">
@@ -434,8 +473,8 @@
                 <p>&copy; 2025 SkillSquad Academy. All rights reserved.</p>
                 <div class="footer-badges">
                     <span class="badge">🏆 Top Rated</span>
-                    <span class="badge">🎓 Top Companies Certified</span>
-                    <span class="badge">💼 100% Placement</span>
+                    <span class="badge">🎓 Industry Certified</span>
+                    <span class="badge">💼 100% Placement Guarantee</span>
                 </div>
             </div>
         </div>

@@ -1,39 +1,45 @@
 // Apply Page JavaScript
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('applicationForm');
     const steps = document.querySelectorAll('.form-step');
     const progressSteps = document.querySelectorAll('.progress-step');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
+    const nextBtns = document.querySelectorAll('.next-btn');
+    const prevBtns = document.querySelectorAll('.prev-btn');
     const submitBtn = document.getElementById('submitBtn');
-    
+
     let currentStep = 1;
     const totalSteps = steps.length;
-    
+
     // Initialize form
     initForm();
-    
+
     // Event listeners
-    nextBtn.addEventListener('click', nextStep);
-    prevBtn.addEventListener('click', prevStep);
+    nextBtns.forEach(btn => btn.addEventListener('click', nextStep));
+    prevBtns.forEach(btn => btn.addEventListener('click', prevStep));
     form.addEventListener('submit', handleSubmit);
-    
-    // Progress step click handlers
+
+    // Prevent skipping forward on progress bar click
     progressSteps.forEach((step, index) => {
-        step.addEventListener('click', () => {
-            if (index + 1 <= currentStep) {
-                goToStep(index + 1);
+        step.addEventListener('click', (e) => {
+            const targetStep = index + 1;
+            if (targetStep > currentStep) {
+                // Trying to go forward → must validate current step
+                if (!validateCurrentStep()) {
+                    e.preventDefault();
+                    return;
+                }
             }
+            goToStep(targetStep);
         });
     });
-    
+
     function initForm() {
         updateProgress();
         updateNavigation();
         validateCurrentStep();
     }
-    
+
     function nextStep() {
         if (validateCurrentStep()) {
             if (currentStep < totalSteps) {
@@ -42,56 +48,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
+
     function prevStep() {
         if (currentStep > 1) {
             currentStep--;
             updateForm();
         }
     }
-    
+
     function goToStep(stepNumber) {
-        if (stepNumber >= 1 && stepNumber <= totalSteps && stepNumber <= currentStep) {
+        if (stepNumber >= 1 && stepNumber <= totalSteps) {
             currentStep = stepNumber;
             updateForm();
         }
     }
-    
+
     function updateForm() {
-        // Hide all steps
         steps.forEach(step => step.classList.remove('active'));
-        
-        // Show current step
-        const currentStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+        const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
         if (currentStepElement) {
             currentStepElement.classList.add('active');
         }
-        
-        // Update progress
         updateProgress();
-        
-        // Update navigation
         updateNavigation();
-        
-        // Validate current step
         validateCurrentStep();
-        
-        // If it's the review step, populate review content
+
         if (currentStep === 4) {
             populateReview();
         }
-        
-        // Smooth scroll to form
-        document.getElementById('application-form').scrollIntoView({ 
+
+        document.getElementById('application-form').scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
     }
-    
+
     function updateProgress() {
         progressSteps.forEach((step, index) => {
             const stepNumber = index + 1;
-            
             if (stepNumber < currentStep) {
                 step.classList.remove('active');
                 step.classList.add('completed');
@@ -103,34 +97,40 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     function updateNavigation() {
-        // Show/hide previous button
-        prevBtn.style.display = currentStep === 1 ? 'none' : 'flex';
+        // Hide all navigation buttons first
+        nextBtns.forEach(btn => btn.style.display = 'none');
+        prevBtns.forEach(btn => btn.style.display = 'none');
         
-        // Show/hide next and submit buttons
-        if (currentStep === totalSteps) {
-            nextBtn.style.display = 'none';
-            submitBtn.style.display = 'flex';
-        } else {
-            nextBtn.style.display = 'flex';
-            submitBtn.style.display = 'none';
+        // Show appropriate buttons for current step
+        const currentNextBtn = document.querySelector(`[data-step="${currentStep}"].next-btn`);
+        const currentPrevBtn = document.querySelector(`[data-step="${currentStep}"].prev-btn`);
+        
+        if (currentPrevBtn && currentStep > 1) {
+            currentPrevBtn.style.display = 'flex';
         }
         
-        // Update button text
-        if (currentStep === totalSteps - 1) {
-            nextBtn.innerHTML = '<span>Review</span><i class="fas fa-eye"></i>';
-        } else {
-            nextBtn.innerHTML = '<span>Next</span><i class="fas fa-arrow-right"></i>';
+        if (currentStep === totalSteps) {
+            // Show submit button on last step
+            submitBtn.style.display = 'flex';
+        } else if (currentNextBtn) {
+            currentNextBtn.style.display = 'flex';
+            
+            // Update button text for review step
+            if (currentStep === totalSteps - 1) {
+                currentNextBtn.innerHTML = '<span>Review</span><i class="fas fa-eye"></i>';
+            } else {
+                currentNextBtn.innerHTML = '<span>Next</span><i class="fas fa-arrow-right"></i>';
+            }
         }
     }
-    
+
     function validateCurrentStep() {
-        const currentStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+        const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
         const requiredFields = currentStepElement.querySelectorAll('[required]');
         let isValid = true;
-        
-        // Clear previous error states
+
         currentStepElement.querySelectorAll('.form-group').forEach(group => {
             group.classList.remove('error', 'success');
             const errorMessage = group.querySelector('.error-message');
@@ -138,31 +138,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorMessage.remove();
             }
         });
-        
-        // Validate required fields
+
         requiredFields.forEach(field => {
             const formGroup = field.closest('.form-group');
-            
             if (!field.value.trim()) {
                 showFieldError(formGroup, 'This field is required');
                 isValid = false;
             } else {
-                showFieldSuccess(formGroup);
-                
-                // Additional validation for specific fields
+                // Check email validation
                 if (field.type === 'email' && !isValidEmail(field.value)) {
                     showFieldError(formGroup, 'Please enter a valid email address');
                     isValid = false;
-                }
-                
-                if (field.type === 'tel' && !isValidPhone(field.value)) {
+                } 
+                // Check phone validation
+                else if (field.type === 'tel' && !isValidPhone(field.value)) {
                     showFieldError(formGroup, 'Please enter a valid phone number');
                     isValid = false;
+                } 
+                // Field is valid
+                else {
+                    showFieldSuccess(formGroup);
                 }
             }
         });
-        
-        // Special validation for program selection
+
         if (currentStep === 3) {
             const programSelected = currentStepElement.querySelector('input[name="programInterest"]:checked');
             if (!programSelected) {
@@ -171,37 +170,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
         }
-        
         return isValid;
     }
-    
+
     function showFieldError(formGroup, message) {
         formGroup.classList.add('error');
         formGroup.classList.remove('success');
-        
         const errorMessage = document.createElement('div');
         errorMessage.className = 'error-message';
         errorMessage.textContent = message;
         formGroup.appendChild(errorMessage);
     }
-    
+
     function showFieldSuccess(formGroup) {
         formGroup.classList.add('success');
         formGroup.classList.remove('error');
     }
-    
+
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
-    
+
     function isValidPhone(phone) {
         const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
         return phoneRegex.test(phone.replace(/\s/g, ''));
     }
-    
+
     function populateReview() {
-        // Personal Information
         const personalData = {
             'First Name': document.getElementById('firstName').value,
             'Last Name': document.getElementById('lastName').value,
@@ -213,10 +209,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'City': document.getElementById('city').value,
             'State': document.getElementById('state').value
         };
-        
         populateReviewSection('personalReview', personalData);
-        
-        // Educational Background
+
         const educationData = {
             'Highest Education': document.getElementById('highestEducation').value || 'Not specified',
             'Graduation Year': document.getElementById('graduationYear').value || 'Not specified',
@@ -225,10 +219,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'CGPA/Percentage': document.getElementById('cgpa').value || 'Not specified',
             'Current Status': document.getElementById('currentStatus').value || 'Not specified'
         };
-        
         populateReviewSection('educationReview', educationData);
-        
-        // Program Selection
+
         const programData = {
             'Program Interest': getSelectedProgramText(),
             'Start Date': document.getElementById('startDate').value || 'Not specified',
@@ -236,10 +228,9 @@ document.addEventListener('DOMContentLoaded', function() {
             'Motivation': document.getElementById('motivation').value || 'Not specified',
             'Prior Experience': document.getElementById('priorExperience').value || 'None'
         };
-        
         populateReviewSection('programReview', programData);
     }
-    
+
     function getSelectedProgramText() {
         const selectedProgram = document.querySelector('input[name="programInterest"]:checked');
         if (selectedProgram) {
@@ -248,51 +239,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return 'Not selected';
     }
-    
+
     function populateReviewSection(elementId, data) {
         const element = document.getElementById(elementId);
         if (!element) return;
-        
         let html = '';
         for (const [key, value] of Object.entries(data)) {
             html += `<div class="review-item"><strong>${key}:</strong> ${value}</div>`;
         }
         element.innerHTML = html;
     }
-    
+
     function handleSubmit(e) {
         e.preventDefault();
-        
         if (!validateCurrentStep()) {
             return;
         }
-        
-        // Check terms acceptance
         const termsAccepted = document.getElementById('termsAccepted').checked;
         if (!termsAccepted) {
             alert('Please accept the Terms & Conditions to continue.');
             return;
         }
-        
-        // Show loading state
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-        
-        // Simulate form submission (replace with actual submission logic)
         setTimeout(() => {
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
-            
-            // Show success message
             showSuccessMessage();
-            
-            // Reset form after showing success
             setTimeout(() => {
                 resetForm();
             }, 3000);
         }, 2000);
     }
-    
+
     function showSuccessMessage() {
         const successMessage = document.createElement('div');
         successMessage.className = 'application-success';
@@ -300,66 +279,117 @@ document.addEventListener('DOMContentLoaded', function() {
             <h4>🎉 Application Submitted Successfully!</h4>
             <p>Thank you for applying to SkillSquad Academy. We'll review your application and get back to you within 24 hours.</p>
         `;
-        
         const form = document.getElementById('applicationForm');
         form.parentNode.insertBefore(successMessage, form);
-        
-        // Scroll to success message
         successMessage.scrollIntoView({ behavior: 'smooth' });
     }
-    
+
     function resetForm() {
-        // Reset form fields
         form.reset();
-        
-        // Reset to first step
         currentStep = 1;
         updateForm();
-        
-        // Remove success message
         const successMessage = document.querySelector('.application-success');
         if (successMessage) {
             successMessage.remove();
         }
     }
+
+    // Add real-time validation for all fields
+    function setupFieldValidation() {
+        const allFields = form.querySelectorAll('input, select, textarea');
+        
+        allFields.forEach(field => {
+            // Validate on blur (when user leaves the field)
+            field.addEventListener('blur', function() {
+                validateSingleField(this);
+            });
+            
+            // Validate on input (as user types)
+            field.addEventListener('input', function() {
+                // Only show success, don't show errors while typing
+                if (this.value.trim()) {
+                    const isFieldValid = validateSingleField(this, false);
+                    if (isFieldValid) {
+                        showFieldSuccess(this.closest('.form-group'));
+                    }
+                }
+            });
+        });
+        
+        // Special handling for radio buttons
+        const radioButtons = form.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                const formGroup = this.closest('.form-group');
+                if (formGroup) {
+                    showFieldSuccess(formGroup);
+                }
+            });
+        });
+    }
     
-    // Real-time validation for email and phone
-    document.getElementById('email').addEventListener('blur', function() {
-        const formGroup = this.closest('.form-group');
-        if (this.value && !isValidEmail(this.value)) {
-            showFieldError(formGroup, 'Please enter a valid email address');
-        } else if (this.value) {
+    function validateSingleField(field, showErrors = true) {
+        const formGroup = field.closest('.form-group');
+        const value = field.value.trim();
+        let isValid = true;
+        
+        // Clear previous validation state
+        formGroup.classList.remove('error', 'success');
+        const existingError = formGroup.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Don't validate if field is empty and not required, or if we're not showing errors
+        if (!value && (!field.required || !showErrors)) {
+            return true;
+        }
+        
+        // Required field validation
+        if (field.required && !value) {
+            if (showErrors) {
+                showFieldError(formGroup, 'This field is required');
+            }
+            isValid = false;
+        }
+        // Email validation
+        else if (field.type === 'email' && value && !isValidEmail(value)) {
+            if (showErrors) {
+                showFieldError(formGroup, 'Please enter a valid email address');
+            }
+            isValid = false;
+        }
+        // Phone validation
+        else if (field.type === 'tel' && value && !isValidPhone(value)) {
+            if (showErrors) {
+                showFieldError(formGroup, 'Please enter a valid phone number');
+            }
+            isValid = false;
+        }
+        // Field is valid and has value
+        else if (value) {
             showFieldSuccess(formGroup);
         }
-    });
+        
+        return isValid;
+    }
     
-    document.getElementById('phone').addEventListener('blur', function() {
-        const formGroup = this.closest('.form-group');
-        if (this.value && !isValidPhone(this.value)) {
-            showFieldError(formGroup, 'Please enter a valid phone number');
-        } else if (this.value) {
-            showFieldSuccess(formGroup);
-        }
-    });
-    
-    // Auto-save form data to localStorage
+    // Initialize field validation
+    setupFieldValidation();
+
     function autoSaveForm() {
         const formData = new FormData(form);
         const data = {};
-        
         for (const [key, value] of formData.entries()) {
             data[key] = value;
         }
-        
         localStorage.setItem('applicationFormData', JSON.stringify(data));
     }
-    
-    // Load saved form data
+
     function loadSavedForm() {
         const savedData = localStorage.getItem('applicationFormData');
         if (savedData) {
             const data = JSON.parse(savedData);
-            
             for (const [key, value] of Object.entries(data)) {
                 const field = document.querySelector(`[name="${key}"]`);
                 if (field) {
@@ -368,21 +398,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
-    // Auto-save on input change
+
     form.addEventListener('input', autoSaveForm);
-    
-    // Load saved data on page load
     loadSavedForm();
-    
-    // Clear saved data on successful submission
+
     function clearSavedData() {
         localStorage.removeItem('applicationFormData');
     }
-    
-    // Update the handleSubmit function to clear saved data
+
     const originalHandleSubmit = handleSubmit;
-    handleSubmit = function(e) {
+    handleSubmit = function (e) {
         originalHandleSubmit.call(this, e);
         clearSavedData();
     };
