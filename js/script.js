@@ -232,7 +232,8 @@ class SkillSquadApp {
                 item.classList.add('active');
                 
                 // Track interaction
-                const moduleName = item.querySelector('h4').textContent;
+                const h4 = item.querySelector('h4');
+                const moduleName = h4 ? h4.textContent : `Module ${index + 1}`;
                 this.trackEvent('module_click', { module: moduleName, index });
             });
 
@@ -337,9 +338,11 @@ class SkillSquadApp {
 
         // Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
+        const originalText = submitBtn ? submitBtn.textContent : null;
+        if (submitBtn) {
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+        }
 
         // Simulate API call
         setTimeout(() => {
@@ -347,9 +350,11 @@ class SkillSquadApp {
             form.reset();
             
             // Reset button
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
+            if (submitBtn) {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                if (originalText !== null) submitBtn.textContent = originalText;
+            }
             
             // Track form submission
             this.trackEvent('form_submit', { form: form.id || 'unknown' });
@@ -664,27 +669,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoryFilter = document.getElementById("category-filter");
     const durationFilter = document.getElementById("duration-filter");
     const courseGrid = document.getElementById("course-grid");
-    const courseCards = courseGrid.querySelectorAll(".course-card");
     const noResultsMessage = document.getElementById("no-results-message");
-  
+
     // For mobile responsive filters
     const mobileFilterToggle = document.getElementById("mobile-filter-toggle");
     const sidebar = document.querySelector(".filters-sidebar");
-  
+
+    // Safely exit if the course filter UI is not present on this page
+    if (!categoryFilter || !durationFilter || !courseGrid || !noResultsMessage || !mobileFilterToggle || !sidebar) {
+      // Nothing to wire up on this page
+      return;
+    }
+
+    const courseCards = courseGrid.querySelectorAll(".course-card");
+
     // --- State Management ---
     let currentFilters = {
       category: "all",
       duration: "all",
     };
-  
+
     // --- Main Filter Logic ---
     const filterCourses = () => {
       let visibleCoursesCount = 0;
-  
+
       courseCards.forEach((card) => {
         const cardCategory = card.dataset.category;
         const cardDuration = card.dataset.duration;
-  
+
         // Check if card matches current filters
         const categoryMatch =
           currentFilters.category === "all" ||
@@ -692,7 +704,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const durationMatch =
           currentFilters.duration === "all" ||
           currentFilters.duration === cardDuration;
-  
+
         if (categoryMatch && durationMatch) {
           card.classList.remove("hidden");
           visibleCoursesCount++;
@@ -700,44 +712,48 @@ document.addEventListener("DOMContentLoaded", () => {
           card.classList.add("hidden");
         }
       });
-  
+
       // Toggle the 'no results' message based on visibility count
       noResultsMessage.classList.toggle("hidden", visibleCoursesCount > 0);
     };
-  
+
     // --- Generic Filter Event Handler ---
     const addFilterListener = (filterElement, filterKey) => {
+      if (!filterElement) return;
       filterElement.addEventListener("click", (e) => {
         if (e.target && e.target.tagName === "LI") {
-          // Update active class
-          filterElement.querySelector(".active").classList.remove("active");
+          // Update active class (safely remove if present)
+          const currentActive = filterElement.querySelector(".active");
+          if (currentActive) currentActive.classList.remove("active");
           e.target.classList.add("active");
-  
+
           // Update filter state
           currentFilters[filterKey] = e.target.dataset[filterKey];
-  
+
           // Re-run the filter function
           filterCourses();
         }
       });
     };
-  
+
     addFilterListener(categoryFilter, "category");
     addFilterListener(durationFilter, "duration");
-  
+
     // --- Mobile Filter Toggle ---
-    mobileFilterToggle.addEventListener("click", () => {
-      // The 'open' class will toggle 'display: block' on mobile
-      sidebar.classList.toggle("open");
-    });
-  
+    if (mobileFilterToggle && sidebar) {
+      mobileFilterToggle.addEventListener("click", () => {
+        // The 'open' class will toggle 'display: block' on mobile
+        sidebar.classList.toggle("open");
+      });
+    }
+
     // Close all other forms when opening a new one
     function closeAllForms() {
       document.querySelectorAll(".enquiry-form-container").forEach((form) => {
         form.classList.remove("active");
       });
     }
-  
+
     // Toggle form visibility
     document.querySelectorAll(".enquiry-btn").forEach((button) => {
       button.addEventListener("click", function (e) {
@@ -746,20 +762,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const formContainer = cardContent.querySelector(
           ".enquiry-form-container"
         );
-  
+
         // Close all forms first
         closeAllForms();
-  
+
         // Toggle the current form
         formContainer.classList.toggle("active");
-  
+
         // Scroll to the form if it's being opened
         if (formContainer.classList.contains("active")) {
           formContainer.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       });
     });
-  
+
     // Close form when clicking outside
     document.addEventListener("click", function (e) {
       if (
@@ -769,7 +785,7 @@ document.addEventListener("DOMContentLoaded", () => {
         closeAllForms();
       }
     });
-  
+
     // Form submission handling
     document.querySelectorAll(".enquiry-form form").forEach((form) => {
       form.addEventListener("submit", function (e) {
@@ -781,4 +797,3 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-  
