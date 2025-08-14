@@ -19,7 +19,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
-  <body>
+<body class="contact-page">
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
       <div class="nav-container">
@@ -70,7 +70,6 @@
       <div class="container">
         <div
           class="features-grid"
-          style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))"
         >
           <!-- Contact Info -->
           <div class="feature-card">
@@ -114,11 +113,8 @@
               <i class="fas fa-envelope-open-text"></i>
             </div>
             <h3>Send a Message</h3>
-            <form class="contact-form" action="#" method="post">
-              <div
-                class="form-row"
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px"
-              >
+            <form id="contactForm" class="contact-form" action="#" method="post" novalidate>
+              <div class="form-row">
                 <div class="form-group">
                   <label for="name">Full Name</label>
                   <input
@@ -140,10 +136,7 @@
                   />
                 </div>
               </div>
-              <div
-                class="form-row"
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px"
-              >
+              <div class="form-row">
                 <div class="form-group">
                   <label for="phone">Phone</label>
                   <input
@@ -178,73 +171,118 @@
                 <span>Send Message</span>
                 <i class="fas fa-paper-plane"></i>
               </button>
+              <div id="formResponse" aria-live="polite" style="display: none; margin-top: 12px;"></div>
             </form>
           </div>
           <script>
-            document
-              .getElementById("contactForm")
-              .addEventListener("submit", function (e) {
-                e.preventDefault();
+            document.getElementById("contactForm").addEventListener("submit", function (e) {
+              e.preventDefault();
 
-                const form = e.target;
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalHtml = submitBtn.innerHTML;
+              const form = e.target;
+              const submitBtn = form.querySelector('button[type="submit"]');
+              const originalHtml = submitBtn.innerHTML;
+              const responseDiv = document.getElementById("formResponse");
 
-                // Show loading state
-                submitBtn.disabled = true;
-                submitBtn.innerHTML =
-                  '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+              // Reset previous response and highlights
+              responseDiv.style.display = "none";
+              responseDiv.innerHTML = "";
+              for (const el of form.querySelectorAll("input, textarea")) {
+                el.style.borderColor = "";
+              }
 
-                // Hide previous response
-                document.getElementById("formResponse").style.display = "none";
+              // Collect and validate inputs
+              const name = form.name.value.trim();
+              const email = form.email.value.trim();
+              const phone = form.phone.value.trim();
+              const subject = form.subject.value.trim();
+              const message = form.message.value.trim();
 
-                // Send form data
-                fetch("backend/submit_contact.php", {
-                  method: "POST",
-                  body: new FormData(form),
-                })
-                  .then((response) => response.json())
-                  .then((data) => {
-                    const responseDiv = document.getElementById("formResponse");
-                    responseDiv.style.display = "block";
+              const errors = {};
+              if (name.length < 2) {
+                errors.name = "Please enter your full name (at least 2 characters).";
+              }
+              const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+              if (!emailRegex.test(email)) {
+                errors.email = "Please enter a valid email address (e.g., name@example.com).";
+              }
+              if (phone) {
+                const digits = phone.replace(/\D/g, "");
+                const validLocal = digits.length === 10 && /^[6-9]\d{9}$/.test(digits);
+                const validWithCC = digits.length === 12 && digits.startsWith("91") && /^[6-9]\d{9}$/.test(digits.slice(2));
+                if (!(validLocal || validWithCC)) {
+                  errors.phone = "Enter a valid Indian mobile number (10 digits starting 6–9), optionally prefixed with +91.";
+                }
+              }
+              if (subject.length < 3) {
+                errors.subject = "Subject should be at least 3 characters.";
+              }
+              if (message.length < 10) {
+                errors.message = "Message should be at least 10 characters.";
+              }
 
-                    if (data.success) {
-                      responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                      form.reset();
-                    } else {
-                      let errorHtml = `<div class="alert alert-danger"><strong>${data.message}</strong>`;
-                      if (data.errors) {
-                        errorHtml += "<ul>";
-                        for (const [field, error] of Object.entries(
-                          data.errors
-                        )) {
-                          errorHtml += `<li>${error}</li>`;
-                          // Highlight problematic fields
-                          const input = form.querySelector(`[name="${field}"]`);
-                          if (input) {
-                            input.style.borderColor = "#dc3545";
-                            input.addEventListener("input", () => {
-                              input.style.borderColor = "";
-                            });
-                          }
+              if (Object.keys(errors).length > 0) {
+                let errorHtml = `<div class="alert alert-danger"><strong>Please fix the errors below</strong><ul>`;
+                for (const [field, error] of Object.entries(errors)) {
+                  errorHtml += `<li>${error}</li>`;
+                  const input = form.querySelector(`[name="${field}"]`);
+                  if (input) {
+                    input.style.borderColor = "#dc3545";
+                    input.addEventListener("input", () => {
+                      input.style.borderColor = "";
+                    }, { once: true });
+                  }
+                }
+                errorHtml += `</ul></div>`;
+                responseDiv.innerHTML = errorHtml;
+                responseDiv.style.display = "block";
+                return;
+              }
+
+              // Show loading state and send form data
+              submitBtn.disabled = true;
+              submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+
+              fetch("backend/submit_contact.php", {
+                method: "POST",
+                body: new FormData(form),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  responseDiv.style.display = "block";
+
+                  if (data.success) {
+                    responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                    form.reset();
+                  } else {
+                    let errorHtml = `<div class="alert alert-danger"><strong>${data.message}</strong>`;
+                    if (data.errors) {
+                      errorHtml += "<ul>";
+                      for (const [field, error] of Object.entries(data.errors)) {
+                        errorHtml += `<li>${error}</li>`;
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                          input.style.borderColor = "#dc3545";
+                          input.addEventListener("input", () => {
+                            input.style.borderColor = "";
+                          }, { once: true });
                         }
-                        errorHtml += "</ul>";
                       }
-                      errorHtml += "</div>";
-                      responseDiv.innerHTML = errorHtml;
+                      errorHtml += "</ul>";
                     }
-                  })
-                  .catch((error) => {
-                    document.getElementById(
-                      "formResponse"
-                    ).innerHTML = `<div class="alert alert-danger">Network error. Please try again.</div>`;
-                    console.error("Error:", error);
-                  })
-                  .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalHtml;
-                  });
-              });
+                    errorHtml += "</div>";
+                    responseDiv.innerHTML = errorHtml;
+                  }
+                })
+                .catch((error) => {
+                  responseDiv.style.display = "block";
+                  responseDiv.innerHTML = `<div class="alert alert-danger">Network error. Please try again.</div>`;
+                  console.error("Error:", error);
+                })
+                .finally(() => {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = originalHtml;
+                });
+            });
           </script>
         </div>
       </div>

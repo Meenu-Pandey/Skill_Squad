@@ -259,6 +259,31 @@
     line-height: 1.5;
 }
 
+/* Desktop enhancements for Contact page */
+@media (min-width: 1024px) {
+    /* Two-column layout: info (left) narrower, form (right) wider */
+    .contact-page .features-grid {
+        grid-template-columns: 1fr 1.5fr !important;
+        align-items: start;
+        gap: 32px;
+    }
+
+    .contact-page .feature-card {
+        padding: 28px 32px;
+    }
+
+    .contact-page .contact-form .btn {
+        width: auto;
+        padding-left: 28px;
+        padding-right: 28px;
+        align-self: start;
+    }
+
+    .contact-page .form-row {
+        gap: 24px;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .form-row {
