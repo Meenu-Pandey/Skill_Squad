@@ -503,6 +503,13 @@
         </div>
     </div>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('img[src]:not([data-src])').forEach(function(img){
+          if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+        });
+      });
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>

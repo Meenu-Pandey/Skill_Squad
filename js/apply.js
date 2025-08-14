@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
         element.innerHTML = html;
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         if (!validateCurrentStep()) {
             return;
@@ -260,24 +260,81 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please accept the Terms & Conditions to continue.');
             return;
         }
+
+        // Build form data expected by backend/submit_application.php
+        const formData = new FormData(form);
+
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-        setTimeout(() => {
+
+        try {
+            const response = await fetch('backend/submit_application.php', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
-            showSuccessMessage();
-            setTimeout(() => {
-                resetForm();
-            }, 3000);
-        }, 2000);
+
+            // Remove any previous messages
+            const prevSuccess = document.querySelector('.application-success');
+            if (prevSuccess) prevSuccess.remove();
+            const prevError = document.querySelector('.application-errors');
+            if (prevError) prevError.remove();
+
+            if (data.success) {
+                showSuccessMessage(data.message || "Application submitted successfully!");
+                // Clear saved draft on success and reset form after a short delay
+                clearSavedData();
+                setTimeout(() => {
+                    resetForm();
+                }, 2000);
+            } else {
+                // Render errors at the top of the current step
+                const errorBox = document.createElement('div');
+                errorBox.className = 'application-errors';
+                let html = '<h4>Please fix the following errors:</h4><ul>';
+                if (data.errors && typeof data.errors === 'object') {
+                    Object.entries(data.errors).forEach(([field, msg]) => {
+                        html += `<li>${msg}</li>`;
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            const group = input.closest('.form-group');
+                            if (group) {
+                                group.classList.add('error');
+                                const em = document.createElement('div');
+                                em.className = 'error-message';
+                                em.textContent = msg;
+                                group.appendChild(em);
+                            }
+                            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                } else if (data.message) {
+                    html += `<li>${data.message}</li>`;
+                }
+                html += '</ul>';
+                errorBox.innerHTML = html;
+                form.insertAdjacentElement('afterbegin', errorBox);
+                // Jump to the step with required errors if we are on review
+                currentStep = Math.min(currentStep, 3);
+                updateForm();
+            }
+        } catch (err) {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            alert('An error occurred while submitting your application. Please try again.');
+            console.error(err);
+        }
     }
 
-    function showSuccessMessage() {
+    function showSuccessMessage(message) {
         const successMessage = document.createElement('div');
         successMessage.className = 'application-success';
         successMessage.innerHTML = `
             <h4>🎉 Application Submitted Successfully!</h4>
-            <p>Thank you for applying to SkillSquad Academy. We'll review your application and get back to you within 24 hours.</p>
+            <p>${message || "Thank you for applying to SkillSquad Academy. We'll review your application and get back to you shortly."}</p>
         `;
         const form = document.getElementById('applicationForm');
         form.parentNode.insertBefore(successMessage, form);
@@ -379,6 +436,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function autoSaveForm() {
         const formData = new FormData(form);
+        // Ensure CSRF token present
+        if (!formData.get('csrf_token') && window.__CSRF_TOKEN__) {
+            formData.append('csrf_token', window.__CSRF_TOKEN__);
+        }
         const data = {};
         for (const [key, value] of formData.entries()) {
             data[key] = value;
@@ -406,9 +467,5 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.removeItem('applicationFormData');
     }
 
-    const originalHandleSubmit = handleSubmit;
-    handleSubmit = function (e) {
-        originalHandleSubmit.call(this, e);
-        clearSavedData();
-    };
+    // Clear saved data on successful submit is handled inside handleSubmit
 });

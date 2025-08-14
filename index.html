@@ -386,14 +386,14 @@
             <div class="section-header">
                 <span class="section-tag">Success Stories</span>
                 <h2>Our Students Are <span class="gradient-text">Thriving</span></h2>
-                <p>Join thousands of successful graduates who transformed their careers with SkyySkill</p>
+                <p>Join thousands of successful graduates who transformed their careers with SkillSquad</p>
             </div>
             
             <div class="success-grid">
                 <div class="success-card">
                     <div class="success-header">
                         <div class="student-avatar">
-                            <img src="" alt="Chinmayi Paani">
+                            <img src="https://via.placeholder.com/80x80/0ea5e9/FFFFFF?text=CP" alt="Chinmayi Paani">
                         </div>
                         <div class="student-info">
                             <h4>Chinmayi Paani</h4>
@@ -438,7 +438,7 @@
                         </div>
                     </div>
                     <div class="success-content">
-                        <p>"The practical approach and real-world projects at SkyySkill gave me the confidence to excel in interviews. The placement support team was incredible throughout the process."</p>
+                        <p>"The practical approach and real-world projects at SkillSquad gave me the confidence to excel in interviews. The placement support team was incredible throughout the process."</p>
                     </div>
                     <div class="success-metrics">
                         <div class="metric">
@@ -466,7 +466,7 @@
             <div class="cta-content">
                 <div class="cta-left">
                     <h2>Ready to Transform Your Career?</h2>
-                    <p>Join thousands of successful developers who started their journey with SkyySkill Academy.</p>
+                    <p>Join thousands of successful developers who started their journey with SkillSquad Academy.</p>
                     <div class="cta-features">
                         <div class="cta-feature">
                             <i class="fas fa-check"></i>
@@ -602,6 +602,14 @@
         </div>
     </div>
 
+    <script>
+      // Add native lazy-loading to images that use direct src (avoid IO-managed data-src)
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('img[src]:not([data-src])').forEach(function(img){
+          if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+        });
+      });
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>

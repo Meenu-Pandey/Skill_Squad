@@ -501,8 +501,14 @@
         </div>
     </div>
 
+    <script>
+      // Fetch CSRF token before loading app scripts
+      window.__CSRF_TOKEN__ = null;
+      fetch('backend/csrf.php', { credentials: 'same-origin' })
+        .then(r => r.json()).then(d => { window.__CSRF_TOKEN__ = d.token; })
+        .catch(() => {});
+    </script>
     <script src="js/script.js"></script>
     <script src="js/apply.js"></script>
-    <script src="js/applyForm.js"></script>
 </body>
 </html>

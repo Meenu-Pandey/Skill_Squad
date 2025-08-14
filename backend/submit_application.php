@@ -1,5 +1,6 @@
 <?php
 require_once 'db_config.php';
+require_once 'csrf.php';
 
 header('Content-Type: application/json');
 
@@ -10,6 +11,11 @@ $response = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
+        $conn->close();
+        exit;
+    }
     // Validate required fields
     $required = [
         'firstName', 'lastName', 'email', 'phone', 'dateOfBirth',
@@ -74,27 +80,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         )";
         
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "ssssssssssisssssssssii",
-            $data['first_name'], $data['last_name'], $data['email'],
-            $data['phone'], $data['date_of_birth'], $data['gender'],
-            $data['address'], $data['city'], $data['state'],
-            $data['highest_education'], $data['graduation_year'],
-            $data['institution'], $data['field_of_study'], $data['cgpa'],
-            $data['current_status'], $data['program_interest'],
-            $data['preferred_start'], $data['time_commitment'],
-            $data['motivation'], $data['prior_experience'],
-            $data['terms_accepted'], $data['marketing_consent']
-        );
-        
-        if ($stmt->execute()) {
-            $response['success'] = true;
-            $response['message'] = 'Application submitted successfully!';
+        if (!$stmt) {
+            $response['message'] = 'Failed to prepare statement: ' . $conn->error;
         } else {
-            $response['message'] = 'Error submitting application: ' . $stmt->error;
+            // Normalize optional nullables to actual NULL via mysqli by using bind_param with appropriate types
+            // Types: s x 10, i (graduation_year), s x 8, i (terms), i (marketing)
+            $types = "ssssssssssisssssssssii";
+
+            // Convert empty strings to NULL for selected optional fields
+            $nullableKeys = ['gender','graduation_year','institution','field_of_study','cgpa','prior_experience'];
+            foreach ($nullableKeys as $k) {
+                if ($data[$k] === '' || $data[$k] === null) {
+                    $data[$k] = null; // mysqli will send NULL when bound
+                }
+            }
+
+            $stmt->bind_param(
+                $types,
+                $data['first_name'], $data['last_name'], $data['email'],
+                $data['phone'], $data['date_of_birth'], $data['gender'],
+                $data['address'], $data['city'], $data['state'],
+                $data['highest_education'], $data['graduation_year'],
+                $data['institution'], $data['field_of_study'], $data['cgpa'],
+                $data['current_status'], $data['program_interest'],
+                $data['preferred_start'], $data['time_commitment'],
+                $data['motivation'], $data['prior_experience'],
+                $data['terms_accepted'], $data['marketing_consent']
+            );
+            
+            if ($stmt->execute()) {
+                $response['success'] = true;
+                $response['message'] = 'Application submitted successfully!';
+            } else {
+                $response['message'] = 'Error submitting application: ' . $stmt->error;
+            }
+            
+            $stmt->close();
         }
-        
-        $stmt->close();
     } else {
         $response['message'] = 'Please correct the errors in your application';
     }

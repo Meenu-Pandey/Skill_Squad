@@ -2,13 +2,14 @@
 // Database Configuration
 // NOTE: Do not output anything from this file to avoid corrupting API responses.
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'course_requests');
-define('DB_USER', 'root');
-define('DB_PASS', 'Prathamesh@12');
+// Prefer environment variables, fallback to defaults for local dev
+$envHost = getenv('DB_HOST') ?: 'localhost';
+$envName = getenv('DB_NAME') ?: 'course_requests';
+$envUser = getenv('DB_USER') ?: 'root';
+$envPass = getenv('DB_PASS') ?: 'Prathamesh@12';
 
 // Create connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = new mysqli($envHost, $envUser, $envPass, $envName);
 
 // Check connection
 if ($conn->connect_error) {

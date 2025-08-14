@@ -1,5 +1,6 @@
 <?php
 require_once 'db_config.php';
+require_once 'csrf.php';
 
 header('Content-Type: application/json');
 
@@ -11,6 +12,11 @@ $response = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
+        $conn->close();
+        exit;
+    }
     // Sanitize inputs
     $name = trim($conn->real_escape_string($_POST['name'] ?? ''));
     $email = trim($conn->real_escape_string($_POST['email'] ?? ''));

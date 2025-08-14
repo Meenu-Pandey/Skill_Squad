@@ -14,11 +14,15 @@ function initFilterTabs() {
 
     filterTabs.forEach(tab => {
         tab.addEventListener('click', function() {
-            // Remove active class from all tabs
-            filterTabs.forEach(t => t.classList.remove('active'));
+            // Remove active class and reset aria-selected from all tabs
+            filterTabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
             
-            // Add active class to clicked tab
+            // Add active class and set aria-selected to clicked tab
             this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
 
             const filterValue = this.getAttribute('data-filter');
 

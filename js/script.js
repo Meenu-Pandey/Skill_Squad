@@ -492,18 +492,7 @@ class SkillSquadApp {
     }
 
     preloadCriticalResources() {
-        const criticalResources = [
-            '/css/modern-styles.css',
-            '/js/modern-script.js'
-        ];
-
-        criticalResources.forEach(resource => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.href = resource;
-            link.as = resource.endsWith('.css') ? 'style' : 'script';
-            document.head.appendChild(link);
-        });
+        // No-op: avoid preloading non-existent resources
     }
 
     // setupServiceWorker() {
@@ -786,14 +775,73 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Form submission handling
+    // Form submission handling (wired to backend)
     document.querySelectorAll(".enquiry-form form").forEach((form) => {
-      form.addEventListener("submit", function (e) {
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
-        // Here you would typically send the form data to your server
-        alert("Form submitted successfully! We will contact you shortly.");
-        this.reset();
-        this.closest(".enquiry-form-container").classList.remove("active");
+
+        const container = this.closest(".enquiry-form-container");
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.textContent : '';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+        }
+
+        // Build payload expected by backend/submit_callback.php
+        const fullName = this.querySelector('input[placeholder*="Full Name" i]')?.value?.trim() || '';
+        const phone = this.querySelector('input[placeholder*="Phone" i]')?.value?.trim() || '';
+        const whatsapp = this.querySelector('input[placeholder*="WhatsApp" i]')?.value?.trim() || '';
+        const email = this.querySelector('input[type="email"]')?.value?.trim() || '';
+        const preferred_language = this.querySelector('select')?.value || '';
+        const courseHidden = this.querySelector('input[name="course"]')?.value;
+        const fallbackCourseTitle = this.closest('.card-content')?.querySelector('h3')?.textContent?.trim();
+        const course_name = courseHidden || fallbackCourseTitle || 'Unknown Course';
+
+        const fd = new FormData();
+        if (window.__CSRF_TOKEN__) fd.append('csrf_token', window.__CSRF_TOKEN__);
+        fd.append('full_name', fullName);
+        fd.append('phone', phone);
+        fd.append('whatsapp', whatsapp);
+        fd.append('email', email);
+        fd.append('preferred_language', preferred_language);
+        fd.append('course_name', course_name);
+
+        let feedback = container.querySelector('.form-feedback');
+        if (!feedback) {
+          feedback = document.createElement('div');
+          feedback.className = 'form-feedback';
+          feedback.style.marginTop = '8px';
+          this.appendChild(feedback);
+        }
+        feedback.textContent = '';
+
+        try {
+          const res = await fetch('backend/submit_callback.php', { method: 'POST', body: fd });
+          const data = await res.json();
+
+          if (data.success) {
+            feedback.style.color = '#155724';
+            feedback.textContent = data.message || 'Request submitted!';
+            this.reset();
+            setTimeout(() => {
+              container.classList.remove('active');
+              feedback.textContent = '';
+            }, 1500);
+          } else {
+            feedback.style.color = '#721c24';
+            feedback.textContent = (data.message || 'Please correct the highlighted fields');
+          }
+        } catch (err) {
+          console.error(err);
+          feedback.style.color = '#721c24';
+          feedback.textContent = 'Network error. Please try again.';
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText || 'Request Callback';
+          }
+        }
       });
     });
   });

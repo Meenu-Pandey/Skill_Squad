@@ -113,7 +113,8 @@
               <i class="fas fa-envelope-open-text"></i>
             </div>
             <h3>Send a Message</h3>
-            <form id="contactForm" class="contact-form" action="#" method="post" novalidate>
+<form id="contactForm" class="contact-form" action="#" method="post" novalidate>
+              <input type="hidden" name="csrf_token" id="contact_csrf" value="">
               <div class="form-row">
                 <div class="form-group">
                   <label for="name">Full Name</label>
@@ -200,6 +201,12 @@ document.addEventListener('DOMContentLoaded', function() {
             responseDiv.style.display = "none";
 
             // Send form data
+            // Attach CSRF token
+            const csrfInput = form.querySelector('#contact_csrf');
+            if (csrfInput && window.__CSRF_TOKEN__) {
+                csrfInput.value = window.__CSRF_TOKEN__;
+            }
+
             fetch("backend/submit_contact.php", {
                 method: "POST",
                 body: new FormData(form),
@@ -345,6 +352,22 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
+    <script>
+      // Ensure CSRF token available on contact page
+      window.__CSRF_TOKEN__ = window.__CSRF_TOKEN__ || null;
+      if (!window.__CSRF_TOKEN__) {
+        fetch('backend/csrf.php', { credentials: 'same-origin' })
+          .then(r => r.json()).then(d => { window.__CSRF_TOKEN__ = d.token; })
+          .catch(() => {});
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('img[src]:not([data-src])').forEach(function(img){
+          if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+        });
+      });
+    </script>
     <script src="js/script.js"></script>
   </body>
 </html>

@@ -17,6 +17,14 @@
     />
   </head>
   <body>
+    <script>
+      // Preload CSRF token for course enquiries
+      window.__CSRF_TOKEN__ = null;
+      fetch('backend/csrf.php', { credentials: 'same-origin' })
+        .then(r => r.json()).then(d => { window.__CSRF_TOKEN__ = d.token; })
+        .catch(() => {});
+    </script>
+  <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
       <div class="nav-container">
@@ -934,6 +942,13 @@
         </div>
     </div>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('img[src]:not([data-src])').forEach(function(img){
+          if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+        });
+      });
+    </script>
     <script src="js/script.js"></script>
   </body>
 </html>
