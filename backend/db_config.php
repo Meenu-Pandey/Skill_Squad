@@ -1,5 +1,7 @@
 <?php
 // Database Configuration
+// NOTE: Do not output anything from this file to avoid corrupting API responses.
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'course_requests');
 define('DB_USER', 'root');
@@ -10,10 +12,12 @@ $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Check connection
 if ($conn->connect_error) {
+    http_response_code(500);
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create table (modify fields as needed)
+// Create tables if not exists (silent failures will bubble up to callers via $conn->error)
+// 1) Callbacks table
 $sql = "CREATE TABLE IF NOT EXISTS course_callbacks (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -26,10 +30,10 @@ $sql = "CREATE TABLE IF NOT EXISTS course_callbacks (
 )";
 
 if (!$conn->query($sql)) {
-    die("Error creating table: " . $conn->error);
+    // Intentionally no echo; allow callers to inspect $conn->error if needed
 }
 
-// Create tables if not exists
+// 2) Applications table
 $sql = "CREATE TABLE IF NOT EXISTS applications (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -59,9 +63,10 @@ $sql = "CREATE TABLE IF NOT EXISTS applications (
 )";
 
 if (!$conn->query($sql)) {
-    die("Error creating applications table: " . $conn->error);
+    // Intentionally no echo; allow callers to inspect $conn->error if needed
 }
 
+// 3) Contact messages table
 $sql = "CREATE TABLE IF NOT EXISTS contact_messages (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -73,9 +78,7 @@ $sql = "CREATE TABLE IF NOT EXISTS contact_messages (
     is_read BOOLEAN DEFAULT 0
 )";
 
-if ($conn->query($sql)) {
-    echo "Table created successfully";
-} else {
-    echo "Error creating table: " . $conn->error;
+if (!$conn->query($sql)) {
+    // Intentionally no echo; allow callers to inspect $conn->error if needed
 }
 ?>
