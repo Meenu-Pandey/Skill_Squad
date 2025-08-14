@@ -459,12 +459,6 @@ class SkillSquadApp {
     setupPerformanceOptimizations() {
         // Lazy loading for images
         this.setupLazyLoading();
-        
-        // Preload critical resources
-        this.preloadCriticalResources();
-        
-        // Setup service worker (if available)
-        this.setupServiceWorker();
     }
 
     setupLazyLoading() {
@@ -491,31 +485,12 @@ class SkillSquadApp {
         }
     }
 
-    preloadCriticalResources() {
-        // No-op: avoid preloading non-existent resources
-    }
-
-    // setupServiceWorker() {
-    //     if ('serviceWorker' in navigator) {
-    //         window.addEventListener('load', () => {
-    //             navigator.serviceWorker.register('/sw.js')
-    //                 .then(registration => {
-    //                     console.log('SW registered: ', registration);
-    //                 })
-    //                 .catch(registrationError => {
-    //                     console.log('SW registration failed: ', registrationError);
-    //                 });
-    //         });
-    //     }
-    // }
-
     // Analytics & Tracking
     trackEvent(eventName, properties = {}) {
         // Console log for development
         console.log('Event tracked:', eventName, properties);
         
         // Here you would integrate with your analytics service
-        // Example: Google Analytics, Mixpanel, etc.
         if (typeof gtag !== 'undefined') {
             gtag('event', eventName, properties);
         }
@@ -625,60 +600,45 @@ class SkillSquadApp {
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
     const app = new SkillSquadApp();
-
-    // Make app globally available for debugging
     window.SkillSquadApp = app;
-
     console.log('🚀 SkillSquad Academy loaded successfully!');
 });
 
 // Error handling
 window.addEventListener('error', (e) => {
     console.error('JavaScript error:', e.error);
-    // Here you would send error reports to your monitoring service
 });
 
 // Performance monitoring
 window.addEventListener('load', () => {
-    // Measure and report performance metrics
     if ('performance' in window) {
         const perfData = performance.getEntriesByType('navigation')[0];
         console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
     }
 });
 
-// Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SkillSquadApp;
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-    // --- Element Selection ---
     const categoryFilter = document.getElementById("category-filter");
     const durationFilter = document.getElementById("duration-filter");
     const courseGrid = document.getElementById("course-grid");
     const noResultsMessage = document.getElementById("no-results-message");
-
-    // For mobile responsive filters
     const mobileFilterToggle = document.getElementById("mobile-filter-toggle");
     const sidebar = document.querySelector(".filters-sidebar");
 
-    // Safely exit if the course filter UI is not present on this page
     if (!categoryFilter || !durationFilter || !courseGrid || !noResultsMessage || !mobileFilterToggle || !sidebar) {
-      // Nothing to wire up on this page
       return;
     }
 
     const courseCards = courseGrid.querySelectorAll(".course-card");
-
-    // --- State Management ---
     let currentFilters = {
       category: "all",
       duration: "all",
     };
 
-    // --- Main Filter Logic ---
     const filterCourses = () => {
       let visibleCoursesCount = 0;
 
@@ -686,7 +646,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const cardCategory = card.dataset.category;
         const cardDuration = card.dataset.duration;
 
-        // Check if card matches current filters
         const categoryMatch =
           currentFilters.category === "all" ||
           currentFilters.category === cardCategory;
@@ -702,24 +661,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Toggle the 'no results' message based on visibility count
       noResultsMessage.classList.toggle("hidden", visibleCoursesCount > 0);
     };
 
-    // --- Generic Filter Event Handler ---
     const addFilterListener = (filterElement, filterKey) => {
       if (!filterElement) return;
       filterElement.addEventListener("click", (e) => {
         if (e.target && e.target.tagName === "LI") {
-          // Update active class (safely remove if present)
           const currentActive = filterElement.querySelector(".active");
           if (currentActive) currentActive.classList.remove("active");
           e.target.classList.add("active");
 
-          // Update filter state
           currentFilters[filterKey] = e.target.dataset[filterKey];
-
-          // Re-run the filter function
           filterCourses();
         }
       });
@@ -728,44 +681,33 @@ document.addEventListener("DOMContentLoaded", () => {
     addFilterListener(categoryFilter, "category");
     addFilterListener(durationFilter, "duration");
 
-    // --- Mobile Filter Toggle ---
     if (mobileFilterToggle && sidebar) {
       mobileFilterToggle.addEventListener("click", () => {
-        // The 'open' class will toggle 'display: block' on mobile
         sidebar.classList.toggle("open");
       });
     }
 
-    // Close all other forms when opening a new one
     function closeAllForms() {
       document.querySelectorAll(".enquiry-form-container").forEach((form) => {
         form.classList.remove("active");
       });
     }
 
-    // Toggle form visibility
     document.querySelectorAll(".enquiry-btn").forEach((button) => {
       button.addEventListener("click", function (e) {
         e.preventDefault();
         const cardContent = this.closest(".card-content");
-        const formContainer = cardContent.querySelector(
-          ".enquiry-form-container"
-        );
+        const formContainer = cardContent.querySelector(".enquiry-form-container");
 
-        // Close all forms first
         closeAllForms();
-
-        // Toggle the current form
         formContainer.classList.toggle("active");
 
-        // Scroll to the form if it's being opened
         if (formContainer.classList.contains("active")) {
           formContainer.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       });
     });
 
-    // Close form when clicking outside
     document.addEventListener("click", function (e) {
       if (
         !e.target.closest(".enquiry-form-container") &&
@@ -775,73 +717,97 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Form submission handling (wired to backend)
+    document.querySelectorAll(".enquiry-form form").forEach((form) => {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("Form submitted successfully! We will contact you shortly.");
+        this.reset();
+        this.closest(".enquiry-form-container").classList.remove("active");
+      });
+    });
     document.querySelectorAll(".enquiry-form form").forEach((form) => {
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const container = this.closest(".enquiry-form-container");
         const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn ? submitBtn.textContent : '';
+        const originalText = submitBtn ? submitBtn.textContent : "";
         if (submitBtn) {
           submitBtn.disabled = true;
-          submitBtn.textContent = 'Submitting...';
+          submitBtn.textContent = "Submitting...";
         }
 
         // Build payload expected by backend/submit_callback.php
-        const fullName = this.querySelector('input[placeholder*="Full Name" i]')?.value?.trim() || '';
-        const phone = this.querySelector('input[placeholder*="Phone" i]')?.value?.trim() || '';
-        const whatsapp = this.querySelector('input[placeholder*="WhatsApp" i]')?.value?.trim() || '';
-        const email = this.querySelector('input[type="email"]')?.value?.trim() || '';
-        const preferred_language = this.querySelector('select')?.value || '';
+        const fullName =
+          this.querySelector(
+            'input[placeholder*="Full Name" i]'
+          )?.value?.trim() || "";
+        const phone =
+          this.querySelector('input[placeholder*="Phone" i]')?.value?.trim() ||
+          "";
+        const whatsapp =
+          this.querySelector(
+            'input[placeholder*="WhatsApp" i]'
+          )?.value?.trim() || "";
+        const email =
+          this.querySelector('input[type="email"]')?.value?.trim() || "";
+        const preferred_language = this.querySelector("select")?.value || "";
         const courseHidden = this.querySelector('input[name="course"]')?.value;
-        const fallbackCourseTitle = this.closest('.card-content')?.querySelector('h3')?.textContent?.trim();
-        const course_name = courseHidden || fallbackCourseTitle || 'Unknown Course';
+        const fallbackCourseTitle = this.closest(".card-content")
+          ?.querySelector("h3")
+          ?.textContent?.trim();
+        const course_name =
+          courseHidden || fallbackCourseTitle || "Unknown Course";
 
         const fd = new FormData();
-        if (window.__CSRF_TOKEN__) fd.append('csrf_token', window.__CSRF_TOKEN__);
-        fd.append('full_name', fullName);
-        fd.append('phone', phone);
-        fd.append('whatsapp', whatsapp);
-        fd.append('email', email);
-        fd.append('preferred_language', preferred_language);
-        fd.append('course_name', course_name);
+        if (window.__CSRF_TOKEN__)
+          fd.append("csrf_token", window.__CSRF_TOKEN__);
+        fd.append("full_name", fullName);
+        fd.append("phone", phone);
+        fd.append("whatsapp", whatsapp);
+        fd.append("email", email);
+        fd.append("preferred_language", preferred_language);
+        fd.append("course_name", course_name);
 
-        let feedback = container.querySelector('.form-feedback');
+        let feedback = container.querySelector(".form-feedback");
         if (!feedback) {
-          feedback = document.createElement('div');
-          feedback.className = 'form-feedback';
-          feedback.style.marginTop = '8px';
+          feedback = document.createElement("div");
+          feedback.className = "form-feedback";
+          feedback.style.marginTop = "8px";
           this.appendChild(feedback);
         }
-        feedback.textContent = '';
+        feedback.textContent = "";
 
         try {
-          const res = await fetch('backend/submit_callback.php', { method: 'POST', body: fd });
+          const res = await fetch("backend/submit_callback.php", {
+            method: "POST",
+            body: fd,
+          });
           const data = await res.json();
 
           if (data.success) {
-            feedback.style.color = '#155724';
-            feedback.textContent = data.message || 'Request submitted!';
+            feedback.style.color = "#155724";
+            feedback.textContent = data.message || "Request submitted!";
             this.reset();
             setTimeout(() => {
-              container.classList.remove('active');
-              feedback.textContent = '';
+              container.classList.remove("active");
+              feedback.textContent = "";
             }, 1500);
           } else {
-            feedback.style.color = '#721c24';
-            feedback.textContent = (data.message || 'Please correct the highlighted fields');
+            feedback.style.color = "#721c24";
+            feedback.textContent =
+              data.message || "Please correct the highlighted fields";
           }
         } catch (err) {
           console.error(err);
-          feedback.style.color = '#721c24';
-          feedback.textContent = 'Network error. Please try again.';
+          feedback.style.color = "#721c24";
+          feedback.textContent = "Network error. Please try again.";
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = originalText || 'Request Callback';
+            submitBtn.textContent = originalText || "Request Callback";
           }
         }
       });
     });
-  });
+});
