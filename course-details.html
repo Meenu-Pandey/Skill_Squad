@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Details</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .details-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 16px;
+      }
+      .details-header {
+        margin-bottom: 24px;
+      }
+      .badge {
+        display: inline-block;
+        background: #eef2ff;
+        color: #1e40af;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        margin-right: 8px;
+      }
+      .section {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 16px 0;
+      }
+      .section h3 {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+      }
+      .section ul {
+        margin: 8px 0 0 20px;
+      }
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .btn-primary {
+        background: #1e40af;
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn-secondary {
+        background: #f3f4f6;
+        color: #111827;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+      }
+      .tool-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #fafafa;
+      }
+      .tool-card i {
+        font-size: 18px;
+        color: #1f2937;
+      }
+      .related-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 12px;
+      }
+      .related-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .related-card a {
+        text-decoration: none;
+        color: #1e40af;
+        font-weight: 500;
+      }
+      #faqs details {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin: 8px 0;
+        background: #fff;
+      }
+      #faqs summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <span class="logo-text"
+              >Skill<span style="color: rgb(0, 21, 255)">Squad</span></span
+            >
+          </div>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="courses.html" class="nav-link active">Courses</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="placements.html" class="nav-link">Placements</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="apply.html" class="nav-cta">Get Started</a>
+        </div>
+
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <header class="main-header">
+      <h1 id="course-title">Course Details</h1>
+      <p id="course-subtitle">Loading course information...</p>
+    </header>
+
+    <div class="details-container">
+      <div id="badges"></div>
+
+      <section class="section">
+        <h3>Overview</h3>
+        <p id="overview"></p>
+      </section>
+
+      <section class="section">
+        <h3>Key Advantages</h3>
+        <ul id="advantages"></ul>
+      </section>
+
+      <section class="section">
+        <h3>Skills You Will Gain</h3>
+        <ul id="skills"></ul>
+      </section>
+
+      <section class="section">
+        <h3>Why This Course Matters</h3>
+        <p id="importance"></p>
+      </section>
+
+      <section class="section">
+        <h3>Ideal Audience & Prerequisites</h3>
+        <p id="audience"></p>
+      </section>
+
+      <section class="section">
+        <h3>Career & Academic Opportunities</h3>
+        <ul id="opportunities"></ul>
+      </section>
+
+      <section class="section">
+        <h3>Syllabus Highlights</h3>
+        <ul id="modules"></ul>
+      </section>
+
+      <section class="section">
+        <h3>Tools & Technologies</h3>
+        <div id="tools" class="tools-grid"></div>
+      </section>
+
+      <section class="section">
+        <h3>Projects You Will Build</h3>
+        <ul id="projects"></ul>
+      </section>
+
+      <section class="section">
+        <h3>Delivery & Support</h3>
+        <ul id="format"></ul>
+      </section>
+
+      <section class="section">
+        <h3>Certification & Assessment</h3>
+        <ul id="certification"></ul>
+      </section>
+
+      <section class="section">
+        <h3>FAQs</h3>
+        <div id="faqs"></div>
+      </section>
+
+      <section class="section">
+        <h3>Related Courses</h3>
+        <div id="related" class="related-grid"></div>
+      </section>
+
+      <div class="cta-row">
+        <a id="applyBtn" href="apply.html" class="btn-primary"
+          ><i class="fas fa-graduation-cap"></i> Apply Now</a
+        >
+        <a href="courses.html" class="btn-secondary"
+          ><i class="fas fa-arrow-left"></i> Back to Courses</a
+        >
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="logo">
+              <div class="logo-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <span class="logo-text">SkillSquad</span>
+            </div>
+            <p>
+              Empowering careers through cutting-edge technology education and
+              industry-focused training programs.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>Courses</h4>
+              <a href="courses.html">View All Courses</a>
+            </div>
+
+            <div class="footer-column">
+              <h4>Company</h4>
+              <a href="about.html">About Us</a>
+              <a href="placements.html">Placements</a>
+              <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="footer-column">
+              <h4>Support</h4>
+              <a href="contact.html">Help Center</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Refund Policy</a>
+            </div>
+
+            <div class="footer-column">
+              <h4>Contact Info</h4>
+              <div class="contact-info">
+                <div class="contact-item">
+                  <i class="fas fa-phone"></i>
+                  <span>+91 88008893XX</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>info@skillsquad.com</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Bhubaneswar, Odisha</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 SkillSquad Academy. All rights reserved.</p>
+          <div class="footer-badges">
+            <span class="badge">🏆 Top Rated</span>
+            <span class="badge">🎓 Top Companies Certified</span>
+            <span class="badge">💼 100% Placement</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function getParam(name) {
+        var params = new URLSearchParams(window.location.search);
+        return params.get(name);
+      }
+
+      var coursesData = {
+        "Vehicle Design and Analysis": {
+          badges: ["CAD Design & Analysis", "24+ Weeks"],
+          overview:
+            "An advanced, project-driven program covering Solidworks, CATIA, and ANSYS for end-to-end vehicle design, validation, and documentation.",
+          advantages: [
+            "Mentor-led sessions with practical design reviews",
+            "Portfolio-ready projects using industry tools",
+            "Strong fundamentals in CAE, FEA, and design workflows",
+            "Exposure to GD&T and manufacturing constraints",
+          ],
+          skills: [
+            "3D modeling in Solidworks and CATIA",
+            "Finite Element Analysis (ANSYS)",
+            "Assembly design, motion simulation",
+            "Drafting, GD&T, BOM creation",
+          ],
+          importance:
+            "Automotive and mobility companies demand cross-tool proficiency in CAD and CAE to shorten design-to-production timelines. This program builds that job-ready blend.",
+          audience:
+            "Ideal for mechanical/automotive engineering students and early-career professionals. Basics of engineering graphics and mechanics recommended.",
+          opportunities: [
+            "Design Engineer / CAD Engineer",
+            "CAE/FEA Engineer",
+            "Product Development Engineer",
+            "Graduate roles in OEMs and Tier-1 suppliers",
+          ],
+          modules: [
+            "CAD fundamentals, sketching, constraints",
+            "Part, surface, and assembly design workflows",
+            "Introduction to FEA and meshing",
+            "Static and modal analysis in ANSYS",
+            "Drafting standards, GD&T, and BOMs",
+          ],
+          tools: [
+            { icon: "fas fa-cubes", label: "Solidworks" },
+            { icon: "fas fa-compass-drafting", label: "CATIA" },
+            { icon: "fas fa-gear", label: "ANSYS" },
+            { icon: "fas fa-ruler-combined", label: "GD&T" },
+          ],
+          projects: [
+            "Design and analyze a suspension linkage",
+            "Sheet-metal enclosure with manufacturing drawings",
+            "Assembly motion study and interference checks",
+          ],
+          format: [
+            "Live mentor-led sessions + recorded backups",
+            "Weekly design reviews and feedback",
+            "1:1 doubt resolution and career guidance",
+          ],
+          certification: [
+            "SkillSquad course completion certificate",
+            "Project-based assessment and portfolio review",
+            "Letter of recommendation for top performers",
+          ],
+          faqs: [
+            {
+              q: "Do I need prior CAD experience?",
+              a: "Basic exposure helps, but we start with fundamentals before advanced workflows.",
+            },
+            {
+              q: "Will I get project feedback?",
+              a: "Yes, mentors review projects weekly with actionable feedback.",
+            },
+            {
+              q: "Is software access included?",
+              a: "We guide setup and provide alternatives/trials where applicable.",
+            },
+          ],
+          related: ["PG in Product Designing & Analysis", "Catia"],
+        },
+        Catia: {
+          badges: ["CAD Design & Analysis", "24+ Weeks"],
+          overview:
+            "Specialized training on CATIA for part, surface, and assembly design with best practices used in automotive and aerospace.",
+          advantages: [
+            "Hands-on CATIA projects aligned to OEM standards",
+            "Emphasis on parametric, robust modeling",
+            "Integration with drafting and PLM workflows",
+          ],
+          skills: [
+            "Part/assembly/surface design in CATIA",
+            "Design intent and parametric control",
+            "Drafting and documentation",
+          ],
+          importance:
+            "CATIA remains a core CAD platform in high-precision industries; proficiency significantly boosts employability.",
+          audience:
+            "Mechanical, automotive, aerospace learners with basic CAD familiarity.",
+          opportunities: [
+            "CATIA Design Engineer",
+            "CAD Analyst",
+            "Junior Product Designer",
+          ],
+          modules: [
+            "Sketcher, Part Design, and Assembly Design",
+            "Wireframe and surface design techniques",
+            "Top-down vs bottom-up design",
+            "Drafting and standards compliance",
+          ],
+          tools: [
+            { icon: "fas fa-compass-drafting", label: "CATIA" },
+            { icon: "fas fa-layer-group", label: "Surfaces" },
+            { icon: "fas fa-sitemap", label: "Assemblies" },
+          ],
+          projects: [
+            "Parametric gearbox housing",
+            "Surface-modeled car panel",
+            "Assembly with exploded views and drawings",
+          ],
+          format: [
+            "Mentor-led labs",
+            "Assignments with rubric",
+            "Mock interviews",
+          ],
+          certification: ["Course certificate", "Project evaluation"],
+          faqs: [
+            {
+              q: "Is CATIA different from Solidworks?",
+              a: "Yes—CATIA is favored in aerospace/automotive for advanced surfacing and enterprise workflows.",
+            },
+          ],
+          related: [
+            "Vehicle Design and Analysis",
+            "PG in Product Designing & Analysis",
+          ],
+        },
+        "Certification in Data Analytics": {
+          badges: ["Data Analytics", "12 Weeks"],
+          overview:
+            "A practical program in data wrangling, visualization, and basic modeling using industry-standard tools.",
+          advantages: [
+            "Case studies with real datasets",
+            "Mentorship and feedback on analysis approach",
+            "Strong visualization and storytelling focus",
+          ],
+          skills: [
+            "SQL basics",
+            "Excel/Sheets for analysis",
+            "Python with Pandas",
+            "Data visualization (Matplotlib/Seaborn)",
+            "Basic statistics",
+          ],
+          importance:
+            "Data literacy is now essential across roles; analytics skills help drive decisions and improve outcomes.",
+          audience:
+            "Beginners and professionals from non-tech backgrounds; no advanced math required.",
+          opportunities: [
+            "Junior Data Analyst",
+            "Business Analyst (entry-level)",
+            "Operations/Data Reporting roles",
+          ],
+          modules: [
+            "Spreadsheets for analysis",
+            "SQL querying and joins",
+            "Pandas for wrangling",
+            "Visualization best practices",
+            "Storytelling with data",
+          ],
+          tools: [
+            { icon: "fas fa-database", label: "SQL" },
+            { icon: "fab fa-python", label: "Python/Pandas" },
+            { icon: "fas fa-chart-line", label: "Visualization" },
+          ],
+          projects: [
+            "Sales dashboard with insights",
+            "Customer churn exploratory analysis",
+            "A/B test analysis report",
+          ],
+          format: [
+            "Case-study driven",
+            "Mentor feedback",
+            "Capstone presentation",
+          ],
+          certification: ["Course certificate", "Capstone evaluation"],
+          faqs: [
+            {
+              q: "Do I need coding?",
+              a: "Basic Python helps, but we cover essentials for analytics.",
+            },
+          ],
+          related: ["Database Design", "Basics of Python"],
+        },
+        "PG in Hybrid Electric Vehicle": {
+          badges: ["Electric Vehicle Tech", "24+ Weeks"],
+          overview:
+            "In-depth program on hybrid/EV systems including powertrains, battery management, and control strategies.",
+          advantages: [
+            "Systems-level view of EV architecture",
+            "Exposure to simulation and modeling workflows",
+            "Industry trends and case studies",
+          ],
+          skills: [
+            "EV architecture",
+            "Battery & BMS fundamentals",
+            "Motor/Power electronics basics",
+            "Vehicle modeling concepts",
+          ],
+          importance:
+            "EV adoption is accelerating worldwide, creating sustained demand for engineers with EV domain knowledge.",
+          audience:
+            "Electrical, electronics, and mechanical engineers with fundamentals in circuits and control.",
+          opportunities: [
+            "EV Systems Engineer (entry)",
+            "Testing/Validation Intern",
+            "R&D assistant in EV startups",
+          ],
+          modules: [
+            "EV powertrain and energy flow",
+            "Batteries and BMS fundamentals",
+            "Motors and power electronics",
+            "Charging systems and safety",
+          ],
+          tools: [
+            { icon: "fas fa-car-side", label: "Vehicle Systems" },
+            { icon: "fas fa-battery-full", label: "Battery/BMS" },
+            { icon: "fas fa-bolt", label: "Power Electronics" },
+          ],
+          projects: [
+            "Energy modeling for city cycle",
+            "BMS fault handling scenarios",
+            "Subsystem specification document",
+          ],
+          format: ["Seminar + lab format", "Industry guest talks"],
+          certification: ["Program certificate", "Project viva"],
+          faqs: [
+            {
+              q: "Is hardware required?",
+              a: "No, we focus on systems concepts and modeling guidance.",
+            },
+          ],
+          related: [
+            "PG in Product Designing & Analysis",
+            "Vehicle Design and Analysis",
+          ],
+        },
+        "Advanced Automotive Design (AutoCAD)": {
+          badges: ["CAD Design & Analysis", "4 Weeks"],
+          overview:
+            "Focused certification on drafting and design principles using AutoCAD for automotive applications.",
+          advantages: [
+            "Short, intensive format",
+            "Applied drafting standards",
+            "Hands-on templates and libraries",
+          ],
+          skills: [
+            "2D drafting",
+            "Layouts and dimensioning",
+            "Blocks, layers, and standards",
+          ],
+          importance:
+            "Accurate drafting underpins manufacturing accuracy and collaboration across teams.",
+          audience: "Beginners in CAD and technicians needing formalization.",
+          opportunities: [
+            "Drafting Technician",
+            "Design Assistant",
+            "Production Support roles",
+          ],
+          modules: [
+            "Layers and blocks",
+            "Orthographic drawings",
+            "Dimensioning and tolerances",
+          ],
+          tools: [
+            { icon: "fas fa-ruler-combined", label: "Dimensioning" },
+            { icon: "fas fa-compass-drafting", label: "Drafting" },
+            { icon: "fas fa-layer-group", label: "Blocks/Layers" },
+          ],
+          projects: ["Assembly drawing package", "Wiring layout"],
+          format: ["Studio sessions", "Checklists and QA"],
+          certification: ["Course certificate"],
+          faqs: [],
+          related: ["Vehicle Design and Analysis", "Catia"],
+        },
+        "Basics of Python": {
+          badges: ["Software & IT", "4 Weeks"],
+          overview:
+            "Beginner-friendly path to core Python syntax, problem solving, and scripting.",
+          advantages: [
+            "Clear, incremental exercises",
+            "Practice-first pedagogy",
+            "Transferable across domains",
+          ],
+          skills: [
+            "Variables and data structures",
+            "Control flow and functions",
+            "File I/O",
+            "Intro to libraries",
+          ],
+          importance:
+            "Python is the most versatile language for automation, data, and web—fundamentals unlock many paths.",
+          audience: "Absolute beginners; no prior coding required.",
+          opportunities: [
+            "Junior Python Intern",
+            "Automation tasks",
+            "Foundation for data/web tracks",
+          ],
+          modules: [
+            "Syntax and variables",
+            "Lists, dicts, loops",
+            "Functions and modules",
+            "Files and errors",
+          ],
+          tools: [
+            { icon: "fab fa-python", label: "Python" },
+            { icon: "fas fa-terminal", label: "CLI" },
+          ],
+          projects: ["CLI expense tracker", "Text file utilities"],
+          format: ["Self-paced + mentor hours", "Weekly coding challenges"],
+          certification: ["Course certificate"],
+          faqs: [
+            {
+              q: "Windows or Mac?",
+              a: "Either works; we help you set up Python.",
+            },
+          ],
+          related: ["Frontend Development", "Backend & APIs"],
+        },
+        "PG in Product Designing & Analysis": {
+          badges: ["CAD Design & Analysis", "24+ Weeks"],
+          overview:
+            "End-to-end program from conceptual design to analysis and documentation across multiple CAD/CAE tools.",
+          advantages: [
+            "Capstone portfolio",
+            "Toolchain breadth (CAD + CAE)",
+            "Industry mentorship",
+          ],
+          skills: [
+            "3D modeling",
+            "FEA basics",
+            "Design for manufacturing",
+            "Technical documentation",
+          ],
+          importance:
+            "Cross-functional design capability is valued in product companies to speed development cycles.",
+          audience:
+            "Mechanical/product engineering students and career switchers.",
+          opportunities: [
+            "Product Designer (junior)",
+            "Design/Analysis Engineer",
+            "R&D Trainee",
+          ],
+          modules: [
+            "Design discovery and briefs",
+            "CAD execution",
+            "Analysis loops",
+            "Documentation and release",
+          ],
+          tools: [
+            { icon: "fas fa-cubes", label: "CAD" },
+            { icon: "fas fa-gear", label: "CAE" },
+            { icon: "fas fa-file-lines", label: "Docs" },
+          ],
+          projects: ["Capstone product design", "Manufacturing drawings"],
+          format: ["Mentorship", "Peer reviews", "Interview prep"],
+          certification: ["Program certificate", "Portfolio review"],
+          faqs: [],
+          related: ["Vehicle Design and Analysis", "Catia"],
+        },
+        "Masterclass on MATLAB": {
+          badges: ["Software & IT", "12 Weeks"],
+          overview:
+            "Comprehensive MATLAB training—from scripting to data analysis and simple modeling.",
+          advantages: [
+            "Hands-on labs",
+            "Signal/data processing focus",
+            "Bridges to Simulink concepts",
+          ],
+          skills: [
+            "MATLAB scripting",
+            "Data visualization",
+            "Basic signal processing",
+            "Numerical methods",
+          ],
+          importance:
+            "MATLAB remains standard in engineering analysis, academia, and control prototyping.",
+          audience:
+            "Students in engineering/science; basic programming helpful but not mandatory.",
+          opportunities: [
+            "Research Assistant roles",
+            "QA/Validation Intern",
+            "Data/Simulation support",
+          ],
+          modules: [
+            "Vectors/matrices",
+            "Plotting & visualization",
+            "Basic signal processing",
+          ],
+          tools: [
+            { icon: "fas fa-square-root-variable", label: "Math" },
+            { icon: "fas fa-wave-square", label: "Signals" },
+          ],
+          projects: ["Signal filtering mini-project", "Data cleaning notebook"],
+          format: ["Lab-first", "Assessments"],
+          certification: ["Course certificate"],
+          faqs: [],
+          related: ["Basics of Python", "Certification in Data Analytics"],
+        },
+        "Frontend Development": {
+          badges: ["Software & IT", "6 Weeks"],
+          overview:
+            "Practical track covering HTML, CSS, JavaScript, and React to build responsive, accessible UIs.",
+          advantages: [
+            "Real-world projects",
+            "Modern tooling (Vite, npm)",
+            "Best practices for performance and accessibility",
+          ],
+          skills: [
+            "Semantic HTML",
+            "Responsive CSS/Flex/Grid",
+            "JavaScript ES6+",
+            "React fundamentals",
+          ],
+          importance:
+            "High demand for frontend skills as digital experiences expand across industries.",
+          audience:
+            "Beginners with basic computer literacy; no prior coding required.",
+          opportunities: [
+            "Frontend Intern/Junior Developer",
+            "UI Developer",
+            "Web Content Engineer",
+          ],
+          modules: [
+            "HTML semantics",
+            "Responsive CSS",
+            "JavaScript DOM",
+            "React components",
+          ],
+          tools: [
+            { icon: "fab fa-html5", label: "HTML5" },
+            { icon: "fab fa-css3-alt", label: "CSS3" },
+            { icon: "fab fa-js", label: "JavaScript" },
+            { icon: "fab fa-react", label: "React" },
+          ],
+          projects: ["Portfolio website", "React todo app"],
+          format: ["Project-first", "Code reviews"],
+          certification: ["Course certificate"],
+          faqs: [
+            { q: "Mac required?", a: "No—Windows, Mac, or Linux are fine." },
+          ],
+          related: ["Backend & APIs", "Deployment & DevOps"],
+        },
+        "Backend & APIs": {
+          badges: ["Software & IT", "8 Weeks"],
+          overview:
+            "Server-side development with Python, Django, REST APIs, auth, and deployment basics.",
+          advantages: [
+            "Security and auth best practices",
+            "Database-backed APIs",
+            "Intro to production ops",
+          ],
+          skills: [
+            "Django fundamentals",
+            "RESTful API design",
+            "Auth & sessions",
+            "Basic server management",
+          ],
+          importance:
+            "Robust backends power modern apps; API fluency is critical for full-stack roles.",
+          audience: "Learners comfortable with basic Python.",
+          opportunities: [
+            "Backend Intern",
+            "API Developer (junior)",
+            "Full-stack trainee",
+          ],
+          modules: [
+            "Django models & ORM",
+            "Views/serializers",
+            "Auth & permissions",
+            "Deploy basics",
+          ],
+          tools: [
+            { icon: "fas fa-server", label: "Django" },
+            { icon: "fas fa-database", label: "PostgreSQL" },
+            { icon: "fas fa-lock", label: "Auth" },
+            { icon: "fas fa-cloud", label: "Deploy" },
+          ],
+          projects: ["REST API for tasks", "Auth-enabled backend"],
+          format: ["Live coding", "Assignments"],
+          certification: ["Course certificate"],
+          faqs: [],
+          related: ["Frontend Development", "Database Design"],
+        },
+        "Database Design": {
+          badges: ["Data Analytics", "4 Weeks"],
+          overview:
+            "Core SQL/NoSQL concepts, schema design, normalization, indexing, and performance basics.",
+          advantages: [
+            "Hands-on schema modeling",
+            "Query optimization practice",
+            "Realistic case studies",
+          ],
+          skills: [
+            "Relational modeling",
+            "SQL joins and indexing",
+            "NoSQL patterns",
+            "Backup and maintenance basics",
+          ],
+          importance:
+            "Well-designed databases are foundational to scalability and data quality.",
+          audience: "Developers/analysts seeking strong data foundations.",
+          opportunities: [
+            "Database Analyst (junior)",
+            "Data Ops Support",
+            "Backend trainee with DB focus",
+          ],
+          modules: [
+            "Requirements to ER model",
+            "Normalization",
+            "Indexing and performance",
+          ],
+          tools: [
+            { icon: "fas fa-database", label: "SQL" },
+            { icon: "fas fa-sitemap", label: "Modeling" },
+          ],
+          projects: ["Schema for e-commerce", "Query optimization report"],
+          format: ["Workshop style", "Performance labs"],
+          certification: ["Course certificate"],
+          faqs: [],
+          related: ["Backend & APIs", "Certification in Data Analytics"],
+        },
+        "AI Integration": {
+          badges: ["Software & IT", "6 Weeks"],
+          overview:
+            "Apply ML APIs and lightweight models to build AI-enabled applications and workflows.",
+          advantages: [
+            "API-first approach",
+            "Prompt engineering and evaluation",
+            "Ethics and safety considerations",
+          ],
+          skills: [
+            "Using AI APIs (vision/NLP)",
+            "Prompt design",
+            "Evaluation & monitoring",
+            "Integration patterns",
+          ],
+          importance:
+            "AI capabilities are rapidly becoming table stakes in products and internal tools.",
+          audience: "Web/dev professionals; basic JS or Python preferred.",
+          opportunities: [
+            "AI App Prototyper",
+            "Automation Developer",
+            "Product Engineer (with AI features)",
+          ],
+          modules: [
+            "Foundations of LLMs & APIs",
+            "Prompt design and evaluation",
+            "Integrating AI into apps",
+          ],
+          tools: [
+            { icon: "fas fa-robot", label: "AI APIs" },
+            { icon: "fas fa-brain", label: "Prompts" },
+          ],
+          projects: ["Q&A chatbot", "Vision-based tagging utility"],
+          format: ["Build-first", "Ethics & safety module"],
+          certification: ["Course certificate"],
+          faqs: [
+            {
+              q: "Do we train models?",
+              a: "We focus on API-based integration and lightweight finetuning guidance.",
+            },
+          ],
+          related: ["Frontend Development", "Backend & APIs"],
+        },
+        "Deployment & DevOps": {
+          badges: ["Software & IT", "4 Weeks"],
+          overview:
+            "Cloud deployment, CI/CD pipelines, containerization basics, and production best practices.",
+          advantages: [
+            "Hands-on with pipelines",
+            "Observability and monitoring intro",
+            "Ops checklists for reliability",
+          ],
+          skills: [
+            "Docker basics",
+            "CI/CD workflows",
+            "Environment configs",
+            "Logging/monitoring fundamentals",
+          ],
+          importance:
+            "Reliable delivery and operations reduce downtime and speed feature rollout.",
+          audience: "Developers comfortable with Git and basic CLI.",
+          opportunities: [
+            "DevOps Intern",
+            "Release Engineer (junior)",
+            "SRE trainee",
+          ],
+          modules: [
+            "Containers and images",
+            "Pipelines and CI/CD",
+            "Monitoring and on-call basics",
+          ],
+          tools: [
+            { icon: "fab fa-docker", label: "Docker" },
+            { icon: "fab fa-git-alt", label: "Git/CI" },
+            { icon: "fas fa-cloud", label: "Cloud" },
+          ],
+          projects: [
+            "Dockerize and deploy a web app",
+            "CI pipeline with tests",
+          ],
+          format: ["Hands-on labs", "Ops checklists"],
+          certification: ["Course certificate"],
+          faqs: [],
+          related: ["Backend & APIs", "Frontend Development"],
+        },
+      };
+
+      (function init() {
+        var courseName = getParam("course");
+        var titleEl = document.getElementById("course-title");
+        var subtitleEl = document.getElementById("course-subtitle");
+        if (!courseName || !coursesData[courseName]) {
+          titleEl.textContent = "Course Not Found";
+          subtitleEl.textContent =
+            "We could not find the selected course. Please return to courses and try again.";
+          return;
+        }
+
+        var data = coursesData[courseName];
+        titleEl.textContent = courseName;
+        subtitleEl.textContent =
+          "Detailed syllabus and outcomes for " + courseName + ".";
+
+        var badgesEl = document.getElementById("badges");
+        if (Array.isArray(data.badges)) {
+          data.badges.forEach(function (b) {
+            var span = document.createElement("span");
+            span.className = "badge";
+            span.textContent = b;
+            badgesEl.appendChild(span);
+          });
+        }
+
+        document.getElementById("overview").textContent = data.overview;
+
+        var advEl = document.getElementById("advantages");
+        data.advantages.forEach(function (a) {
+          var li = document.createElement("li");
+          li.textContent = a;
+          advEl.appendChild(li);
+        });
+
+        var skillsEl = document.getElementById("skills");
+        data.skills.forEach(function (s) {
+          var li = document.createElement("li");
+          li.textContent = s;
+          skillsEl.appendChild(li);
+        });
+
+        document.getElementById("importance").textContent = data.importance;
+        document.getElementById("audience").textContent = data.audience;
+
+        var oppEl = document.getElementById("opportunities");
+        data.opportunities.forEach(function (o) {
+          var li = document.createElement("li");
+          li.textContent = o;
+          oppEl.appendChild(li);
+        });
+
+        function renderList(id, items) {
+          var el = document.getElementById(id);
+          if (!el || !Array.isArray(items)) return;
+          items.forEach(function (txt) {
+            var li = document.createElement("li");
+            li.textContent = txt;
+            el.appendChild(li);
+          });
+        }
+
+        function renderTools(id, items) {
+          var el = document.getElementById(id);
+          if (!el || !Array.isArray(items)) return;
+          items.forEach(function (t) {
+            var card = document.createElement("div");
+            card.className = "tool-card";
+            var icon = document.createElement("i");
+            icon.className = t.icon || "fas fa-toolbox";
+            var span = document.createElement("span");
+            span.textContent = t.label || "Tool";
+            card.appendChild(icon);
+            card.appendChild(span);
+            el.appendChild(card);
+          });
+        }
+
+        function renderFaqs(id, items) {
+          var el = document.getElementById(id);
+          if (!el || !Array.isArray(items)) return;
+          items.forEach(function (qa) {
+            if (!qa || !qa.q) return;
+            var d = document.createElement("details");
+            var s = document.createElement("summary");
+            s.textContent = qa.q;
+            var p = document.createElement("p");
+            p.textContent = qa.a || "";
+            d.appendChild(s);
+            d.appendChild(p);
+            el.appendChild(d);
+          });
+        }
+
+        function renderRelated(id, items) {
+          var el = document.getElementById(id);
+          if (!el || !Array.isArray(items)) return;
+          items.forEach(function (name) {
+            if (!coursesData[name]) return;
+            var card = document.createElement("div");
+            card.className = "related-card";
+            var span = document.createElement("span");
+            span.textContent = name;
+            var a = document.createElement("a");
+            a.href = "course-details.html?course=" + encodeURIComponent(name);
+            a.textContent = "View";
+            card.appendChild(span);
+            card.appendChild(a);
+            el.appendChild(card);
+          });
+        }
+
+        renderList("modules", data.modules);
+        renderTools("tools", data.tools);
+        renderList("projects", data.projects);
+        renderList("format", data.format);
+        renderList("certification", data.certification);
+        renderFaqs("faqs", data.faqs);
+        renderRelated("related", data.related);
+
+        var applyBtn = document.getElementById("applyBtn");
+        if (applyBtn) {
+          applyBtn.href = "apply.html?course=" + encodeURIComponent(courseName);
+        }
+      })();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
