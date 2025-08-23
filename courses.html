@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -20,11 +20,13 @@
     <script>
       // Preload CSRF token for course enquiries
       window.__CSRF_TOKEN__ = null;
-      fetch('backend/csrf.php', { credentials: 'same-origin' })
-        .then(r => r.json()).then(d => { window.__CSRF_TOKEN__ = d.token; })
+      fetch("backend/csrf.php", { credentials: "same-origin" })
+        .then((r) => r.json())
+        .then((d) => {
+          window.__CSRF_TOKEN__ = d.token;
+        })
         .catch(() => {});
     </script>
-  <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
       <div class="nav-container">
@@ -34,7 +36,7 @@
               <i class="fas fa-code"></i>
             </div>
             <span class="logo-text"
-              >Skill<span style="color: rgb(0, 21, 255)">Squad</span></span
+              >Skill<span style="color: var(--primary-600)">Squad</span></span
             >
           </div>
         </div>
@@ -57,8 +59,8 @@
     </nav>
 
     <header class="main-header">
-      <h1>Our Certification Courses</h1>
-      <p>
+      <h1 class="hero-title">Our Certification Courses</h1>
+      <p class="hero-description">
         Explore our industry-recognized programs to build your skills and
         advance your career.
       </p>
@@ -133,7 +135,11 @@
                 >
                   Enquiry
                 </button>
-                <a href="course-details.html?course=Vehicle%20Design%20and%20Analysis" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Vehicle%20Design%20and%20Analysis"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container">
@@ -194,7 +200,9 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Catia" class="btn-view">Know More</a>
+                <a href="course-details.html?course=Catia" class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -250,7 +258,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Certification%20in%20Data%20Analytics" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Certification%20in%20Data%20Analytics"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -306,7 +318,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=PG%20in%20Hybrid%20Electric%20Vehicle" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=PG%20in%20Hybrid%20Electric%20Vehicle"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -362,7 +378,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Advanced%20Automotive%20Design%20(AutoCAD)" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Advanced%20Automotive%20Design%20(AutoCAD)"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -418,7 +438,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Basics%20of%20Python" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Basics%20of%20Python"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -474,7 +498,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=PG%20in%20Product%20Designing%20%26%20Analysis" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=PG%20in%20Product%20Designing%20%26%20Analysis"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -530,7 +558,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Masterclass%20on%20MATLAB" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Masterclass%20on%20MATLAB"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -582,7 +614,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Frontend%20Development" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Frontend%20Development"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -635,7 +671,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Backend%20%26%20APIs" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Backend%20%26%20APIs"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -688,7 +728,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Database%20Design" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Database%20Design"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -741,7 +785,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=AI%20Integration" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=AI%20Integration"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -793,7 +841,11 @@
               </div>
               <div class="btn-group">
                 <a href="#" class="btn-view enquiry-btn">Enquiry</a>
-                <a href="course-details.html?course=Deployment%20%26%20DevOps" class="btn-view">Know More</a>
+                <a
+                  href="course-details.html?course=Deployment%20%26%20DevOps"
+                  class="btn-view"
+                  >Know More</a
+                >
               </div>
 
               <div class="enquiry-form-container" id="enquiryForm">
@@ -848,7 +900,9 @@
               <div class="logo-icon">
                 <i class="fas fa-code"></i>
               </div>
-              <span class="logo-text">SkillSquad</span>
+              <span class="logo-text" style="color: silver"
+                >Skill<span style="color: var(--primary-600)">Squad</span></span
+              >
             </div>
             <p>
               Empowering careers through cutting-edge technology education and
@@ -923,30 +977,33 @@
 
     <!-- Floating Action Button -->
     <div class="fab-container">
-        <div class="fab-main" id="fabMain">
-            <i class="fas fa-plus"></i>
-        </div>
-        <div class="fab-options" id="fabOptions">
-            <a href="#" class="fab-option" data-tooltip="Call Us">
-                <i class="fas fa-phone"></i>
-            </a>
-            <a href="#" class="fab-option" data-tooltip="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="apply.html" class="fab-option" data-tooltip="Apply Now">
-                <i class="fas fa-graduation-cap"></i>
-            </a>
-            <a href="contact.html" class="fab-option" data-tooltip="Contact">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
+      <div class="fab-main" id="fabMain">
+        <i class="fas fa-plus"></i>
+      </div>
+      <div class="fab-options" id="fabOptions">
+        <a href="#" class="fab-option" data-tooltip="Call Us">
+          <i class="fas fa-phone"></i>
+        </a>
+        <a href="#" class="fab-option" data-tooltip="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="apply.html" class="fab-option" data-tooltip="Apply Now">
+          <i class="fas fa-graduation-cap"></i>
+        </a>
+        <a href="contact.html" class="fab-option" data-tooltip="Contact">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('img[src]:not([data-src])').forEach(function(img){
-          if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelectorAll("img[src]:not([data-src])")
+          .forEach(function (img) {
+            if (!img.hasAttribute("loading"))
+              img.setAttribute("loading", "lazy");
+          });
       });
     </script>
     <script src="js/script.js"></script>
